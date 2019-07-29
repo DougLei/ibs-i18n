@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping-configuration>
+	<table name="LOG_OPERATION" class="com.ibs.log.entity.LogOperation" createMode="create">
+		<import-columns path="mappings/table/BasicColumns.xml" />
+		<columns>
+			<column name="batch" property="batch" dataType="nstring" length="36" nullabled="false" />
+			<column name="type" property="type" dataType="nstring" length="20" nullabled="false" />
+			<column name="description" property="description" dataType="string" length="100" />
+			
+			<column name="token" property="token" dataType="nstring" length="36" />
+			
+			<column name="module_id" property="moduleId" dataType="nstring" length="36" />
+			<column name="module_name" property="moduleName" dataType="string" length="50" />
+			
+			<column name="component_id" property="componentId" dataType="nstring" length="36" />
+			<column name="component_name" property="componentName" dataType="string" length="50" />
+			
+			<column name="func_id" property="funcId" dataType="nstring" length="36" />
+			<column name="func_name" property="funcName" dataType="string" length="50" />
+			
+			<column name="is_success" property="isSuccess" dataType="byte" length="1" nullabled="false" />
+			
+			<column name="client_type" property="clientType" dataType="nstring" length="10" nullabled="false" />
+			<column name="client_instance_name" property="clientInstanceName" dataType="string" length="100" />
+			<column name="client_ip" property="clientIp" dataType="string" length="20" />
+			<column name="client_mac" property="clientMac" dataType="string" length="50" />
+		</columns>
+	</table>
+</mapping-configuration>
