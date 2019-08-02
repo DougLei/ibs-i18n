@@ -23,6 +23,6 @@ public class I18nController {
 	@RequestMapping("/query/{code}")
 	public IResponse query(@PathVariable String code) {
 		
-		return ResponseContext.getResponseInstance();
+		return ResponseContext.getResponse();
 	}
 }
