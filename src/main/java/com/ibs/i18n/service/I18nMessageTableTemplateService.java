@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import com.douglei.tools.utils.ExceptionUtil;
 
@@ -13,6 +14,7 @@ import com.douglei.tools.utils.ExceptionUtil;
  * 
  * @author DougLei
  */
+@Service
 public class I18nMessageTableTemplateService {
 	private static final Logger logger = LoggerFactory.getLogger(I18nMessageTableTemplateService.class);
 	
@@ -36,7 +38,7 @@ public class I18nMessageTableTemplateService {
 	 * @param tableIndex
 	 * @return
 	 */
-	public static String getTableName(short tableIndex) {
+	public String getTableName(short tableIndex) {
 		return tableNamePrefix + tableIndex;
 	}
 	
@@ -45,7 +47,7 @@ public class I18nMessageTableTemplateService {
 	 * @param tableIndex
 	 * @return
 	 */
-	public static String getTableMapping(short tableIndex) {
+	public String getTableMapping(short tableIndex) {
 		return String.format(tableMappingTemplate, tableIndex);
 	}
 }

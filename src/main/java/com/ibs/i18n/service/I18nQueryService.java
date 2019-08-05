@@ -1,5 +1,7 @@
 package com.ibs.i18n.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.douglei.orm.context.transaction.component.TransactionComponent;
 
 /**
@@ -8,5 +10,9 @@ import com.douglei.orm.context.transaction.component.TransactionComponent;
  */
 @TransactionComponent
 public class I18nQueryService {
-
+	
+	@Autowired
+	private I18nMessageTableTemplateService templateService;
+	
+	
 }
