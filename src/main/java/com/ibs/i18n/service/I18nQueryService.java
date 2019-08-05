@@ -7,6 +7,6 @@ import com.douglei.orm.context.transaction.component.TransactionComponent;
  * @author DougLei
  */
 @TransactionComponent
-public class I18nService {
+public class I18nQueryService {
 
 }
