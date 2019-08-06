@@ -7,6 +7,7 @@
 			<column name="code" property="code" dataType="string" length="150" nullabled="false" />
 			<column name="language" property="language" dataType="nstring" length="5" nullabled="false" />
 			<column name="message" property="message" dataType="string" length="300" nullabled="false" />
+			<column name="priority" property="priority" dataType="byte" length="3" defaultValue="1" nullabled="false" />
 			
 			<column name="create_user_id" property="createUserId" dataType="nstring" length="36" nullabled="false" />
 			<column name="create_user_name" property="createUserName" dataType="string" length="50" nullabled="false" />

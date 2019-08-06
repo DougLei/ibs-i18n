@@ -6,24 +6,24 @@ import java.io.InputStreamReader;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
+import com.douglei.orm.context.transaction.component.TransactionComponent;
 import com.douglei.tools.utils.ExceptionUtil;
 
 /**
  * 
  * @author DougLei
  */
-@Service
-public class I18nMessageTableTemplateService {
-	private static final Logger logger = LoggerFactory.getLogger(I18nMessageTableTemplateService.class);
+@TransactionComponent
+public class I18nMessageTableService {
+	private static final Logger logger = LoggerFactory.getLogger(I18nMessageTableService.class);
 	
 	private static final String tableNamePrefix = "I18N_MESSAGE_";// 表名前缀
 	private static final String templatePath = "mappings/I18nMessage.tmp.xml.template";// 模板路径
 	private static final String tableMappingTemplate;// 表映射模板
 	static {
-		StringBuilder tmt = new StringBuilder(1200);
-		try(BufferedReader br = new BufferedReader(new InputStreamReader(I18nMessageTableTemplateService.class.getClassLoader().getResourceAsStream(templatePath)))){
+		StringBuilder tmt = new StringBuilder(1305);
+		try(BufferedReader br = new BufferedReader(new InputStreamReader(I18nMessageTableService.class.getClassLoader().getResourceAsStream(templatePath)))){
 			while(br.ready()) {
 				tmt.append(br.readLine().trim());
 			}
@@ -38,16 +38,16 @@ public class I18nMessageTableTemplateService {
 	 * @param tableIndex
 	 * @return
 	 */
-	public String getTableName(short tableIndex) {
+	public String getName(short tableIndex) {
 		return tableNamePrefix + tableIndex;
 	}
 	
 	/**
-	 * 获得国际化消息表的表映射
+	 * 获得国际化消息表的表映射内容
 	 * @param tableIndex
 	 * @return
 	 */
-	public String getTableMapping(short tableIndex) {
+	public String getMappingContent(short tableIndex) {
 		return String.format(tableMappingTemplate, tableIndex);
 	}
 }

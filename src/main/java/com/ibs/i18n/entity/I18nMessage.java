@@ -15,6 +15,7 @@ public class I18nMessage implements Entity{
 	private String code;// 编码
 	private String language;// 语言
 	private String message;// 消息
+	private byte priority;// 优先级
 	
 	private String createUserId;// 创建人id
 	private String createUserName;// 创建人name
@@ -47,6 +48,12 @@ public class I18nMessage implements Entity{
 	}
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	public byte getPriority() {
+		return priority;
+	}
+	public void setPriority(byte priority) {
+		this.priority = priority;
 	}
 	public String getCreateUserId() {
 		return createUserId;

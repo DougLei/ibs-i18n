@@ -12,7 +12,7 @@ import com.douglei.orm.context.transaction.component.TransactionComponent;
 public class I18nQueryService {
 	
 	@Autowired
-	private I18nMessageTableTemplateService templateService;
+	private I18nMessageTableService tableService;
 	
 	
 }
