@@ -1,7 +1,7 @@
 package com.ibs.i18n.service;
 
 import com.douglei.orm.context.transaction.component.TransactionComponent;
-import com.douglei.tools.instances.reader.ProjectConfigurationResourceReader;
+import com.douglei.tools.instances.reader.ResourcesReader;
 
 /**
  * 
@@ -12,7 +12,7 @@ public class I18nMessageTableService {
 	
 	private static final String tableNamePrefix = "I18N_MESSAGE_";// 表名前缀
 	private static final String templatePath = "mappings/I18nMessage.tmp.xml.template";// 模板路径
-	private static final String tableMappingTemplate = new ProjectConfigurationResourceReader(templatePath).readAll(1360).toString();// 表映射模板
+	private static final String tableMappingTemplate = new ResourcesReader(templatePath).readAll(1305).toString();// 表映射模板
 	
 	/**
 	 * 获得国际化消息表的表名
