@@ -1,14 +1,11 @@
 package com.ibs.i18n.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ibs.i18n.service.I18nQueryService;
 import com.ibs.i18n.service.I18nUpdateService;
-import com.ibs.response.Response;
-import com.ibs.response.ResponseContext;
 
 /**
  * 
@@ -23,10 +20,4 @@ public class I18nController {
 	
 	@Autowired
 	private I18nUpdateService updateService;
-	
-	@RequestMapping("/query/{code}")
-	public Response query(@PathVariable String code) {
-		
-		return ResponseContext.getFinalResponse();
-	}
 }

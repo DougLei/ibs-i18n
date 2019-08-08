@@ -6,7 +6,6 @@
 			
 			<column name="project_id" property="projectId" dataType="string" length="36" />
 			<column name="customer_id" property="customerId" dataType="string" length="36" />
-			<column name="unique_code" property="uniqueCode" dataType="string" length="36" nullabled="false" />
 			<column name="table_index" property="tableIndex" dataType="short" length="5" nullabled="false" />
 			
 			<column name="create_user_id" property="createUserId" dataType="string" length="36" nullabled="false" />

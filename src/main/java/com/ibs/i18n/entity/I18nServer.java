@@ -14,7 +14,6 @@ public class I18nServer implements Entity{
 	
 	private String projectId;// 项目id
 	private String customerId;// 租户id
-	private String uniqueCode;// 唯一编码
 	private short tableIndex;// 国际化消息表索引
 	
 	private String createUserId;// 创建人id
@@ -38,12 +37,6 @@ public class I18nServer implements Entity{
 	}
 	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
-	}
-	public String getUniqueCode() {
-		return uniqueCode;
-	}
-	public void setUniqueCode(String uniqueCode) {
-		this.uniqueCode = uniqueCode;
 	}
 	public short getTableIndex() {
 		return tableIndex;
