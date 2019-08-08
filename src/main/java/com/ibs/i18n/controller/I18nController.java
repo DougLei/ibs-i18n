@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ibs.i18n.service.I18nQueryService;
 import com.ibs.i18n.service.I18nUpdateService;
-import com.ibs.response.IResponse;
-import com.ibs.response.impl.dve.ResponseContext;
+import com.ibs.response.Response;
+import com.ibs.response.ResponseContext;
 
 /**
  * 
@@ -25,7 +25,7 @@ public class I18nController {
 	private I18nUpdateService updateService;
 	
 	@RequestMapping("/query/{code}")
-	public IResponse query(@PathVariable String code) {
+	public Response query(@PathVariable String code) {
 		
 		return ResponseContext.getFinalResponse();
 	}
