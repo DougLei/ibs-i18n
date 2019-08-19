@@ -1,6 +1,6 @@
 package com.ibs.i18n.entity;
 
-import com.ibs.dynamictableservice.DynamicTableServiceEntity;
+import com.ibs.dynamic.table.service.DynamicTableServiceEntity;
 
 /**
  * 国际化动态表服务
