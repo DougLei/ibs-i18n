@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping-configuration>
+	<table name="I18N_DYNAMIC_TABLE_SERVICE" class="com.ibs.i18n.entity.I18nDynamicTableService" createMode="create">
+		<import-columns path="mappings/table/DynamicTableServiceColumns.xml"/>	
+		<primaryKeyHandler type="sequence"></primaryKeyHandler>
+	</table>
+</mapping-configuration>
