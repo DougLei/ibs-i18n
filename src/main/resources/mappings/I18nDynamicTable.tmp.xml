@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mapping-configuration>
-	<table name="I18N_DYNAMIC_TABLE" class="com.ibs.i18n.entity.I18nDynamicTable" createMode="create">
+	<table name="I18N_DYNAMIC_TABLE" class="com.ibs.dynamic.table.DynamicTable" createMode="create">
 		<import-columns path="mappings/table/DynamicTableColumns.xml"/>	
 		<primaryKeyHandler type="sequence"></primaryKeyHandler>
 	</table>
