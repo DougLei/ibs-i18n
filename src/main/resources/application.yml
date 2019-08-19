@@ -1,3 +1,8 @@
 server:
   port: 8082
 
+ibs:
+  parent:
+    filter:
+      enable-dynamic-table-filter: true
+      dynamic-table-name: I18N_DYNAMIC_TABLE
