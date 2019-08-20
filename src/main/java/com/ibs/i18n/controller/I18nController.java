@@ -20,4 +20,13 @@ public class I18nController {
 	
 	@Autowired
 	private I18nUpdateService updateService;
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
