@@ -10,6 +10,7 @@ import com.ibs.i18n.entity.I18nMessage;
 import com.ibs.i18n.service.I18nQueryService;
 import com.ibs.i18n.service.I18nUpdateService;
 import com.ibs.parent.code.controller.BasicController;
+import com.ibs.parent.code.validator.DataValidationResult;
 import com.ibs.response.Response;
 import com.ibs.response.ResponseContext;
 
@@ -33,7 +34,7 @@ public class I18nController extends BasicController{
 	 */
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public Response add(I18nMessage message) {
-		if(validate(message) == null) {
+		if(validate(message) == DataValidationResult.SUCCESS) {
 			updateService.add(message);
 		}
 		return ResponseContext.getFinalResponse();
@@ -46,7 +47,7 @@ public class I18nController extends BasicController{
 	 */
 	@RequestMapping(value="/adds", method=RequestMethod.POST)
 	public Response adds(List<I18nMessage> messages) {
-		if(validate(messages) == null) {
+		if(validate(messages) == DataValidationResult.SUCCESS) {
 			updateService.adds(messages);
 		}
 		return ResponseContext.getFinalBatchResponse();
