@@ -9,6 +9,7 @@ import com.douglei.orm.context.transaction.component.Transaction;
 import com.douglei.orm.context.transaction.component.TransactionComponent;
 import com.ibs.i18n.entity.I18nMessage;
 import com.ibs.parent.code.service.BasicService;
+import com.ibs.parent.code.validator.DataValidationResult;
 
 /**
  * 
@@ -26,7 +27,7 @@ public class I18nUpdateService extends BasicService{
 	 */
 	@Transaction
 	public void add(I18nMessage message) {
-		if(validateInDB(message) != null) {
+		if(validate(message) == DataValidationResult.SUCCESS) {
 			SessionContext.getTableSession().save(message);
 		}
 	}
@@ -37,7 +38,7 @@ public class I18nUpdateService extends BasicService{
 	 */
 	@Transaction
 	public void adds(List<I18nMessage> messages) {
-		if(validateInDB(messages) != null) {
+		if(validate(messages) == DataValidationResult.SUCCESS) {
 			SessionContext.getTableSession().save(messages);
 		}
 	}
