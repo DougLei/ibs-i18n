@@ -8,8 +8,8 @@ import com.douglei.orm.context.SessionContext;
 import com.douglei.orm.context.transaction.component.Transaction;
 import com.douglei.orm.context.transaction.component.TransactionComponent;
 import com.ibs.i18n.entity.I18nMessage;
-import com.ibs.parent.code.controller.validator.DataValidationResult;
 import com.ibs.parent.code.service.BasicService;
+import com.ibs.parent.code.validator.DataValidationResult;
 
 /**
  * 
