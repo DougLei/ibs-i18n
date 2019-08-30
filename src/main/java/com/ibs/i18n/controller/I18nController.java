@@ -10,7 +10,7 @@ import com.ibs.i18n.entity.I18nMessage;
 import com.ibs.i18n.service.I18nQueryService;
 import com.ibs.i18n.service.I18nUpdateService;
 import com.ibs.parent.code.controller.BasicController;
-import com.ibs.parent.code.validator.DataValidationResult;
+import com.ibs.parent.code.controller.validator.DataValidationResult;
 import com.ibs.response.Response;
 import com.ibs.response.ResponseContext;
 
