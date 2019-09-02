@@ -2,21 +2,28 @@
 <mapping-configuration>
 	<table name="I18N_MESSAGE_%s" class="com.ibs.i18n.entity.I18nMessage" createMode="create">
 		<columns>
-			<column name="id" property="id" dataType="integer" primaryKey="true" length="20" />
+			<column name="id" property="id" dataType="integer" primaryKey="true" length="20"/>
 			
-			<column name="code" property="code" dataType="string" length="150" nullable="false" />
-			<column name="language" property="language" dataType="string" length="5" nullable="false" />
-			<column name="message" property="message" dataType="nstring" length="200" nullable="false" />
-			<column name="priority" property="priority" dataType="byte" length="3" defaultValue="1" />
+			<column name="code" property="code" dataType="string" length="150" nullable="false" validate="true"/>
+			<column name="language" property="language" dataType="string" length="5" nullable="false" validate="true"/>
+			<column name="message" property="message" dataType="nstring" length="200" nullable="false" validate="true"/>
+			<column name="priority" property="priority" dataType="byte" length="3" defaultValue="1" validate="true"/>
 			
-			<column name="create_user_id" property="createUserId" dataType="string" length="36" nullable="false" />
-			<column name="create_user_name" property="createUserName" dataType="nstring" length="50" nullable="false" />
-			<column name="create_date" property="createDate" dataType="date" nullable="false" />
+			<column name="create_user_id" property="createUserId" dataType="string" length="36" nullable="false"/>
+			<column name="create_user_name" property="createUserName" dataType="nstring" length="50" nullable="false"/>
+			<column name="create_date" property="createDate" dataType="date" nullable="false"/>
 			
-			<column name="last_update_user_id" property="lastUpdateUserId" dataType="string" length="36" nullable="false" />
-			<column name="last_update_user_name" property="lastUpdateUserName" dataType="nstring" length="50" nullable="false" />
-			<column name="last_update_date" property="lastUpdateDate" dataType="date" nullable="false" />
+			<column name="last_update_user_id" property="lastUpdateUserId" dataType="string" length="36" nullable="false"/>
+			<column name="last_update_user_name" property="lastUpdateUserName" dataType="nstring" length="50" nullable="false"/>
+			<column name="last_update_date" property="lastUpdateDate" dataType="date" nullable="false"/>
 		</columns>
+		
+		<constraints>
+			<constraint type="UNIQUE">
+				<column name="code"/>
+				<column name="language"/>
+			</constraint>
+		</constraints>
 		
 		<primaryKeyHandler type="sequence"></primaryKeyHandler>
 	</table>

@@ -1,34 +1,19 @@
 package com.ibs.i18n.service;
 
-import com.douglei.orm.context.transaction.component.TransactionComponent;
+import com.douglei.orm.configuration.environment.mapping.MappingType;
+import com.douglei.orm.sessionfactory.dynamic.mapping.DynamicMapping;
 import com.douglei.tools.instances.reader.ResourcesReader;
+import com.ibs.dynamic.table.DynamicTableService;
 
 /**
  * 
  * @author DougLei
  */
-@TransactionComponent
-public class I18nMessageTableService {
-	
-	private static final String tableNamePrefix = "I18N_MESSAGE_";// 表名前缀
-	private static final String templatePath = "mappings/I18nMessage.tmp.xml.template";// 模板路径
-	private static final String tableMappingTemplate = new ResourcesReader(templatePath).readAll(1305).toString();// 表映射模板
-	
-	/**
-	 * 获得国际化消息表的表名
-	 * @param tableIndex
-	 * @return
-	 */
-	public String getName(short tableIndex) {
-		return tableNamePrefix + tableIndex;
-	}
-	
-	/**
-	 * 获得国际化消息表的表映射内容
-	 * @param tableIndex
-	 * @return
-	 */
-	public String getMappingContent(short tableIndex) {
-		return String.format(tableMappingTemplate, tableIndex);
+public class I18nMessageTableService extends DynamicTableService{
+	private static final String i18nMessageTable_Template = new ResourcesReader("mappings/I18nMessage.tmp.xml.template").readAll(1500).toString();// 表映射模板
+
+	@Override
+	protected DynamicMapping[] getDynamicTableMapping(byte tableIndex) {
+		return new DynamicMapping[] {new DynamicMapping(MappingType.TABLE, String.format(i18nMessageTable_Template, tableIndex))};
 	}
 }
