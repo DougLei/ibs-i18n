@@ -74,7 +74,7 @@ public class I18nUpdateService extends BasicService{
 	 */
 	@Transaction
 	public void delete(I18nMessage message) {
-		if(validate(message, validateCodeAndLanguageUniqueWhenUpdate) == DataValidationResult.SUCCESS) {
+		if(validate(message) == DataValidationResult.SUCCESS) {
 			SessionContext.getTableSession().delete(message);
 		}
 	}
@@ -85,7 +85,7 @@ public class I18nUpdateService extends BasicService{
 	 */
 	@Transaction
 	public void delete(List<I18nMessage> messages) {
-		if(validate(messages, validateCodeAndLanguageUniqueWhenUpdate) == DataValidationResult.SUCCESS) {
+		if(validate(messages) == DataValidationResult.SUCCESS) {
 			SessionContext.getTableSession().delete(messages);
 		}
 	}

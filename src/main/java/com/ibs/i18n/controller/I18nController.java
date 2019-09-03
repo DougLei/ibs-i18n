@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ibs.i18n.entity.I18nMessage;
-import com.ibs.i18n.service.I18nQueryService;
 import com.ibs.i18n.service.I18nUpdateService;
 import com.ibs.parent.code.controller.BasicController;
 import com.ibs.parent.code.validator.DataValidationResult;
@@ -22,10 +21,30 @@ import com.ibs.response.ResponseContext;
 public class I18nController extends BasicController{
 	
 	@Autowired
-	private I18nQueryService queryService;
-	
-	@Autowired
 	private I18nUpdateService updateService;
+	
+	/**
+	 * 初始化指定项目的I18nMessage表
+	 * @param projectId
+	 * @return
+	 */
+	@RequestMapping(value="/initial/{projectId}", method=RequestMethod.GET)
+	public Response initial(String projectId) {
+		// TODO 初始化指定项目的I18nMessage表
+		return ResponseContext.getFinalResponse();
+	}
+	
+	/**
+	 * 销毁指定项目的I18nMessage表
+	 * @param projectId
+	 * @return
+	 */
+	@RequestMapping(value="/destroy/{projectId}", method=RequestMethod.GET)
+	public Response destroy(String projectId) {
+		// TODO 销毁指定项目的I18nMessage表
+		return ResponseContext.getFinalResponse();
+	}
+	
 	
 	/**
 	 * 添加国际化消息
@@ -46,7 +65,7 @@ public class I18nController extends BasicController{
 	 * @return
 	 */
 	@RequestMapping(value="/adds", method=RequestMethod.POST)
-	public Response adds(List<I18nMessage> messages) {
+	public Response add(List<I18nMessage> messages) {
 		if(validate(messages) == DataValidationResult.SUCCESS) {
 			updateService.insert(messages);
 		}

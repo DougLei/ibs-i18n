@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mapping-configuration>
-	<table name="I18N_MESSAGE%s" class="com.ibs.i18n.entity.I18nMessage" createMode="create">
+	<table name="I18N_MESSAGE_%s" class="com.ibs.i18n.entity.I18nMessage" createMode="create">
 		<columns>
-			<column name="id" property="id" dataType="integer" primaryKey="true" length="20"/>
+			<column name="id" property="id" dataType="integer" primaryKey="true" length="20" validate="true"/>
 			
 			<column name="code" property="code" dataType="string" length="150" nullable="false" validate="true"/>
 			<column name="language" property="language" dataType="string" length="5" nullable="false" validate="true"/>
