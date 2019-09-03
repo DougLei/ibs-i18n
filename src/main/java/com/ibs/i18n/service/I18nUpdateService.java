@@ -10,6 +10,7 @@ import com.douglei.orm.sessionfactory.sessions.Session;
 import com.douglei.tools.utils.Collections;
 import com.ibs.dynamic.table.DynamicTableIndexContext;
 import com.ibs.i18n.entity.I18nMessage;
+import com.ibs.parent.code.entity.BasicProperty;
 import com.ibs.parent.code.service.BasicService;
 import com.ibs.parent.code.service.validator.SValidator;
 import com.ibs.parent.code.validator.DataValidationResult;
@@ -20,9 +21,11 @@ import com.ibs.parent.code.validator.DataValidationResult;
  */
 @TransactionComponent
 public class I18nUpdateService extends BasicService{
+	private static final BasicProperty[] basicPropertiesOnSave = {BasicProperty.CREATE_USER_ID, BasicProperty.CREATE_USER_NAME, BasicProperty.CREATE_DATE, BasicProperty.LAST_UPDATE_USER_ID, BasicProperty.LAST_UPDATE_USER_NAME, BasicProperty.LAST_UPDATE_DATE};
+	private static final BasicProperty[] basicPropertiesOnUpdate = {BasicProperty.LAST_UPDATE_USER_ID, BasicProperty.LAST_UPDATE_USER_NAME, BasicProperty.LAST_UPDATE_DATE};
 	private static final ValidateCodeAndLanguageUniqueWhenAdd validateCodeAndLanguageUniqueWhenAdd = new ValidateCodeAndLanguageUniqueWhenAdd();
 	private static final ValidateCodeAndLanguageUniqueWhenUpdate validateCodeAndLanguageUniqueWhenUpdate = new ValidateCodeAndLanguageUniqueWhenUpdate();
-
+	
 	/**
 	 * 添加国际化消息
 	 * @param message
@@ -30,7 +33,7 @@ public class I18nUpdateService extends BasicService{
 	@Transaction
 	public void insert(I18nMessage message) {
 		if(validateByValidator(message, validateCodeAndLanguageUniqueWhenAdd) == DataValidationResult.SUCCESS) {
-			tableSessionSave(message);
+			tableSessionSave(message, basicPropertiesOnSave);
 		}
 	}
 	
@@ -41,7 +44,7 @@ public class I18nUpdateService extends BasicService{
 	@Transaction
 	public void insert(List<I18nMessage> messages) {
 		if(validateByValidator(messages, validateCodeAndLanguageUniqueWhenAdd) == DataValidationResult.SUCCESS) {
-			tableSessionSave(messages);
+			tableSessionSave(messages, basicPropertiesOnSave);
 		}
 	}
 	
@@ -52,7 +55,7 @@ public class I18nUpdateService extends BasicService{
 	@Transaction
 	public void update(I18nMessage message) {
 		if(validateByValidator(message, validateCodeAndLanguageUniqueWhenUpdate) == DataValidationResult.SUCCESS) {
-			tableSessionUpdate(message);
+			tableSessionUpdate(message, basicPropertiesOnUpdate);
 		}
 	}
 	
@@ -63,7 +66,7 @@ public class I18nUpdateService extends BasicService{
 	@Transaction
 	public void update(List<I18nMessage> messages) {
 		if(validateByValidator(messages, validateCodeAndLanguageUniqueWhenUpdate) == DataValidationResult.SUCCESS) {
-			tableSessionUpdate(messages);
+			tableSessionUpdate(messages, basicPropertiesOnUpdate);
 		}
 	}
 
