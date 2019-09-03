@@ -2,7 +2,6 @@ package com.ibs.i18n.service;
 
 import java.util.List;
 
-import com.douglei.orm.context.SessionContext;
 import com.douglei.orm.context.transaction.component.Transaction;
 import com.douglei.orm.context.transaction.component.TransactionComponent;
 import com.douglei.orm.core.metadata.validator.ValidationResult;
@@ -31,7 +30,7 @@ public class I18nUpdateService extends BasicService{
 	@Transaction
 	public void insert(I18nMessage message) {
 		if(validateByValidator(message, validateCodeAndLanguageUniqueWhenAdd) == DataValidationResult.SUCCESS) {
-			SessionContext.getTableSession().save(message);
+			tableSessionSave(message);
 		}
 	}
 	
@@ -42,7 +41,7 @@ public class I18nUpdateService extends BasicService{
 	@Transaction
 	public void insert(List<I18nMessage> messages) {
 		if(validateByValidator(messages, validateCodeAndLanguageUniqueWhenAdd) == DataValidationResult.SUCCESS) {
-			SessionContext.getTableSession().save(messages);
+			tableSessionSave(messages);
 		}
 	}
 	
@@ -53,7 +52,7 @@ public class I18nUpdateService extends BasicService{
 	@Transaction
 	public void update(I18nMessage message) {
 		if(validateByValidator(message, validateCodeAndLanguageUniqueWhenUpdate) == DataValidationResult.SUCCESS) {
-			SessionContext.getTableSession().update(message);
+			tableSessionUpdate(message);
 		}
 	}
 	
@@ -64,7 +63,7 @@ public class I18nUpdateService extends BasicService{
 	@Transaction
 	public void update(List<I18nMessage> messages) {
 		if(validateByValidator(messages, validateCodeAndLanguageUniqueWhenUpdate) == DataValidationResult.SUCCESS) {
-			SessionContext.getTableSession().update(messages);
+			tableSessionUpdate(messages);
 		}
 	}
 
@@ -80,14 +79,11 @@ public class I18nUpdateService extends BasicService{
 
 // 在添加时验证code和language唯一
 class ValidateCodeAndLanguageUniqueWhenAdd implements SValidator<I18nMessage> {
-	protected byte getCompareRadix() {
-		return 0;
-	}
 	
 	@Override
 	public ValidationResult doValidate(I18nMessage i18nMessage, List<I18nMessage> originValidateDatas, Session session, String projectId, String customerId, String databaseId) {
 		byte originCount = Byte.parseByte(session.getSqlSession().uniqueQuery_("select count(id) from I18N_MESSAGE_"+DynamicTableIndexContext.getIndex()+" where code=? and language=?", Collections.toList(i18nMessage.getCode(), i18nMessage.getLanguage()))[0].toString());
-		if(originCount  > getCompareRadix()) {
+		if(originCount  > 0) {
 			return new UniqueValidationResult("code,language", "["+i18nMessage.getCode()+", "+i18nMessage.getLanguage()+"]");
 		}
 		return null;
@@ -95,10 +91,18 @@ class ValidateCodeAndLanguageUniqueWhenAdd implements SValidator<I18nMessage> {
 }
 
 // 在修改时验证code和language唯一
-class ValidateCodeAndLanguageUniqueWhenUpdate extends ValidateCodeAndLanguageUniqueWhenAdd {
+class ValidateCodeAndLanguageUniqueWhenUpdate implements SValidator<I18nMessage> {
+
 	@Override
-	protected byte getCompareRadix() {
-		return 1;
+	public ValidationResult doValidate(I18nMessage i18nMessage, List<I18nMessage> originValidateDatas, Session session, String projectId, String customerId, String databaseId) {
+		Object[] objs = session.getSqlSession().uniqueQuery_("select id from I18N_MESSAGE_"+DynamicTableIndexContext.getIndex()+" where code=? and language=?", Collections.toList(i18nMessage.getCode(), i18nMessage.getLanguage()));
+		if(objs.length > 0) {
+			int id = Integer.parseInt(objs[0].toString());
+			if(id != i18nMessage.getId()) {
+				return new UniqueValidationResult("code,language", "["+i18nMessage.getCode()+", "+i18nMessage.getLanguage()+"]");
+			}
+		}
+		return null;
 	}
 }
 
