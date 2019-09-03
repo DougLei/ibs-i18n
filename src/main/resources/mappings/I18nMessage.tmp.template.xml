@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mapping-configuration>
-	<table name="I18N_MESSAGE_%s" class="com.ibs.i18n.entity.I18nMessage" createMode="create">
+	<table name="I18N_MESSAGE%s" class="com.ibs.i18n.entity.I18nMessage" createMode="create">
 		<columns>
 			<column name="id" property="id" dataType="integer" primaryKey="true" length="20"/>
 			
@@ -19,7 +19,7 @@
 		</columns>
 		
 		<constraints>
-			<constraint type="UNIQUE">
+			<constraint type="unique">
 				<column name="code"/>
 				<column name="language"/>
 			</constraint>

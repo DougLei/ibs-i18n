@@ -35,7 +35,7 @@ public class I18nController extends BasicController{
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public Response add(I18nMessage message) {
 		if(validate(message) == DataValidationResult.SUCCESS) {
-			updateService.add(message);
+			updateService.insert(message);
 		}
 		return ResponseContext.getFinalResponse();
 	}
@@ -48,7 +48,7 @@ public class I18nController extends BasicController{
 	@RequestMapping(value="/adds", method=RequestMethod.POST)
 	public Response adds(List<I18nMessage> messages) {
 		if(validate(messages) == DataValidationResult.SUCCESS) {
-			updateService.adds(messages);
+			updateService.insert(messages);
 		}
 		return ResponseContext.getFinalBatchResponse();
 	}
