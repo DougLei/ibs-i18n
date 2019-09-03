@@ -12,7 +12,7 @@ import com.douglei.tools.utils.Collections;
 import com.ibs.dynamic.table.DynamicTableIndexContext;
 import com.ibs.i18n.entity.I18nMessage;
 import com.ibs.parent.code.service.BasicService;
-import com.ibs.parent.code.service.validator.ValidatorInDB;
+import com.ibs.parent.code.service.validator.Validator;
 import com.ibs.parent.code.validator.DataValidationResult;
 
 /**
@@ -92,7 +92,7 @@ public class I18nUpdateService extends BasicService{
 }
 
 // 在添加时验证code和language唯一
-class ValidateCodeAndLanguageUniqueWhenAdd implements ValidatorInDB<I18nMessage> {
+class ValidateCodeAndLanguageUniqueWhenAdd implements Validator<I18nMessage> {
 	protected byte getCompareRadix() {
 		return 0;
 	}

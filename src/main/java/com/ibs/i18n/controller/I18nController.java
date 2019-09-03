@@ -52,4 +52,57 @@ public class I18nController extends BasicController{
 		}
 		return ResponseContext.getFinalBatchResponse();
 	}
+	
+	/**
+	 * 修改国际化消息
+	 * @param message
+	 * @return
+	 */
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	public Response update(I18nMessage message) {
+		if(validate(message) == DataValidationResult.SUCCESS) {
+			updateService.update(message);
+		}
+		return ResponseContext.getFinalResponse();
+	}
+	
+	/**
+	 * 批量修改国际化消息
+	 * @param messages
+	 * @return
+	 */
+	@RequestMapping(value="/updates", method=RequestMethod.POST)
+	public Response update(List<I18nMessage> messages) {
+		if(validate(messages) == DataValidationResult.SUCCESS) {
+			updateService.update(messages);
+		}
+		return ResponseContext.getFinalBatchResponse();
+	}
+	
+
+	/**
+	 * 删除国际化消息
+	 * @param message
+	 * @return
+	 */
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
+	public Response delete(I18nMessage message) {
+		if(validate(message) == DataValidationResult.SUCCESS) {
+			updateService.delete(message);
+		}
+		return ResponseContext.getFinalResponse();
+	}
+	
+	/**
+	 * 删除修改国际化消息
+	 * @param messages
+	 * @return
+	 */
+	@RequestMapping(value="/deletes", method=RequestMethod.POST)
+	public Response delete(List<I18nMessage> messages) {
+		if(validate(messages) == DataValidationResult.SUCCESS) {
+			updateService.delete(messages);
+		}
+		return ResponseContext.getFinalBatchResponse();
+	}
 }
