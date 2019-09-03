@@ -2,9 +2,12 @@ package com.ibs.i18n.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.ibs.i18n.entity.I18nMessage;
 import com.ibs.i18n.service.I18nUpdateService;
@@ -17,6 +20,7 @@ import com.ibs.response.ResponseContext;
  * 
  * @author DougLei
  */
+@RestController
 @RequestMapping("/i18n")
 public class I18nController extends BasicController{
 	
@@ -97,30 +101,16 @@ public class I18nController extends BasicController{
 		}
 		return ResponseContext.getFinalBatchResponse();
 	}
-	
 
 	/**
 	 * 删除国际化消息
-	 * @param message
 	 * @return
 	 */
-	@RequestMapping(value="/delete", method=RequestMethod.POST)
-	public Response delete(I18nMessage message) {
-		if(validate(message) == DataValidationResult.SUCCESS) {
-			updateService.delete(message);
-		}
-		return ResponseContext.getFinalResponse();
-	}
-	
-	/**
-	 * 删除修改国际化消息
-	 * @param messages
-	 * @return
-	 */
-	@RequestMapping(value="/deletes", method=RequestMethod.POST)
-	public Response delete(List<I18nMessage> messages) {
-		if(validate(messages) == DataValidationResult.SUCCESS) {
-			updateService.delete(messages);
+	@RequestMapping(value="/delete", method=RequestMethod.DELETE)
+	public Response deleteByIds(HttpServletRequest request) {
+		String ids = request.getParameter(deleteIdsKey);
+		if(validateByValidator(ids, validateIdsNotNullWhenDelete) == DataValidationResult.SUCCESS) {
+			updateService.deleteByIds(ids);
 		}
 		return ResponseContext.getFinalBatchResponse();
 	}

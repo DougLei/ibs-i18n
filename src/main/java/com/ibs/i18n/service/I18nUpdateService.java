@@ -12,7 +12,7 @@ import com.douglei.tools.utils.Collections;
 import com.ibs.dynamic.table.DynamicTableIndexContext;
 import com.ibs.i18n.entity.I18nMessage;
 import com.ibs.parent.code.service.BasicService;
-import com.ibs.parent.code.service.validator.Validator;
+import com.ibs.parent.code.service.validator.SValidator;
 import com.ibs.parent.code.validator.DataValidationResult;
 
 /**
@@ -30,7 +30,7 @@ public class I18nUpdateService extends BasicService{
 	 */
 	@Transaction
 	public void insert(I18nMessage message) {
-		if(validate(message, validateCodeAndLanguageUniqueWhenAdd) == DataValidationResult.SUCCESS) {
+		if(validateByValidator(message, validateCodeAndLanguageUniqueWhenAdd) == DataValidationResult.SUCCESS) {
 			SessionContext.getTableSession().save(message);
 		}
 	}
@@ -41,7 +41,7 @@ public class I18nUpdateService extends BasicService{
 	 */
 	@Transaction
 	public void insert(List<I18nMessage> messages) {
-		if(validate(messages, validateCodeAndLanguageUniqueWhenAdd) == DataValidationResult.SUCCESS) {
+		if(validateByValidator(messages, validateCodeAndLanguageUniqueWhenAdd) == DataValidationResult.SUCCESS) {
 			SessionContext.getTableSession().save(messages);
 		}
 	}
@@ -52,7 +52,7 @@ public class I18nUpdateService extends BasicService{
 	 */
 	@Transaction
 	public void update(I18nMessage message) {
-		if(validate(message, validateCodeAndLanguageUniqueWhenUpdate) == DataValidationResult.SUCCESS) {
+		if(validateByValidator(message, validateCodeAndLanguageUniqueWhenUpdate) == DataValidationResult.SUCCESS) {
 			SessionContext.getTableSession().update(message);
 		}
 	}
@@ -63,36 +63,23 @@ public class I18nUpdateService extends BasicService{
 	 */
 	@Transaction
 	public void update(List<I18nMessage> messages) {
-		if(validate(messages, validateCodeAndLanguageUniqueWhenUpdate) == DataValidationResult.SUCCESS) {
+		if(validateByValidator(messages, validateCodeAndLanguageUniqueWhenUpdate) == DataValidationResult.SUCCESS) {
 			SessionContext.getTableSession().update(messages);
 		}
 	}
-	
+
 	/**
 	 * 删除国际化消息
-	 * @param message
+	 * @param ids
 	 */
 	@Transaction
-	public void delete(I18nMessage message) {
-		if(validate(message) == DataValidationResult.SUCCESS) {
-			SessionContext.getTableSession().delete(message);
-		}
-	}
-	
-	/**
-	 * 批量删除国际化消息
-	 * @param messages
-	 */
-	@Transaction
-	public void delete(List<I18nMessage> messages) {
-		if(validate(messages) == DataValidationResult.SUCCESS) {
-			SessionContext.getTableSession().delete(messages);
-		}
+	public void deleteByIds(String ids) {
+		deleteByIds("I18N_MESSAGE_"+DynamicTableIndexContext.getIndex(), "id", ids);
 	}
 }
 
 // 在添加时验证code和language唯一
-class ValidateCodeAndLanguageUniqueWhenAdd implements Validator<I18nMessage> {
+class ValidateCodeAndLanguageUniqueWhenAdd implements SValidator<I18nMessage> {
 	protected byte getCompareRadix() {
 		return 0;
 	}
