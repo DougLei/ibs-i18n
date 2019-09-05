@@ -20,8 +20,7 @@ public class I18nDynamicTableService {
 	private DynamicTableService service;
 	
 	/**
-	 * 系统启动时加载所有满足条件的映射信息
-	 * (tableState=1)
+	 * 系统启动时加载所有满足条件的动态表映射信息
 	 */
 	@Transaction
 	public synchronized void start() {
