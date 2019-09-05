@@ -20,6 +20,15 @@ public class I18nDynamicTableService {
 	private DynamicTableService service;
 	
 	/**
+	 * 系统启动时加载所有满足条件的映射信息
+	 * (tableState=1)
+	 */
+	@Transaction
+	public synchronized void start() {
+		service.start("i18n", i18nMessageTableTemplate);
+	}
+	
+	/**
 	 * 初始化指定项目的动态表
 	 */
 	@Transaction
