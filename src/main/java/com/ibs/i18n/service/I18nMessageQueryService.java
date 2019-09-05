@@ -9,10 +9,10 @@ import com.douglei.orm.context.transaction.component.TransactionComponent;
  * @author DougLei
  */
 @TransactionComponent
-public class I18nQueryService {
+public class I18nMessageQueryService {
 	
 	@Autowired
-	public I18nMessageTableService tableService;
+	public I18nDynamicTableService tableService;
 	
 	
 }

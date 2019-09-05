@@ -20,7 +20,7 @@ import com.ibs.parent.code.validator.DataValidationResult;
  * @author DougLei
  */
 @TransactionComponent
-public class I18nUpdateService extends BasicService{
+public class I18nMessageUpdateService extends BasicService{
 	private static final BasicProperty[] basicPropertiesOnSave = {BasicProperty.CREATE_USER_ID, BasicProperty.CREATE_USER_NAME, BasicProperty.CREATE_DATE, BasicProperty.LAST_UPDATE_USER_ID, BasicProperty.LAST_UPDATE_USER_NAME, BasicProperty.LAST_UPDATE_DATE};
 	private static final BasicProperty[] basicPropertiesOnUpdate = {BasicProperty.LAST_UPDATE_USER_ID, BasicProperty.LAST_UPDATE_USER_NAME, BasicProperty.LAST_UPDATE_DATE};
 	private static final ValidateCodeAndLanguageUniqueWhenAdd validateCodeAndLanguageUniqueWhenAdd = new ValidateCodeAndLanguageUniqueWhenAdd();

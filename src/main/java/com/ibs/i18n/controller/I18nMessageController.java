@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ibs.i18n.entity.I18nMessage;
-import com.ibs.i18n.service.I18nUpdateService;
+import com.ibs.i18n.service.I18nMessageQueryService;
+import com.ibs.i18n.service.I18nMessageUpdateService;
 import com.ibs.parent.code.controller.BasicController;
 import com.ibs.parent.code.validator.DataValidationResult;
 import com.ibs.response.Response;
@@ -21,34 +22,14 @@ import com.ibs.response.ResponseContext;
  * @author DougLei
  */
 @RestController
-@RequestMapping("/i18n")
-public class I18nController extends BasicController{
+@RequestMapping("/i18n/message")
+public class I18nMessageController extends BasicController{
 	
 	@Autowired
-	private I18nUpdateService updateService;
+	private I18nMessageQueryService messageQueryService;
 	
-	/**
-	 * 初始化指定项目的I18nMessage表
-	 * @param projectId
-	 * @return
-	 */
-	@RequestMapping(value="/initial/{projectId}", method=RequestMethod.GET)
-	public Response initial(String projectId) {
-		// TODO 初始化指定项目的I18nMessage表
-		return ResponseContext.getFinalResponse();
-	}
-	
-	/**
-	 * 销毁指定项目的I18nMessage表
-	 * @param projectId
-	 * @return
-	 */
-	@RequestMapping(value="/destroy/{projectId}", method=RequestMethod.GET)
-	public Response destroy(String projectId) {
-		// TODO 销毁指定项目的I18nMessage表
-		return ResponseContext.getFinalResponse();
-	}
-	
+	@Autowired
+	private I18nMessageUpdateService messageUpdateService;
 	
 	/**
 	 * 添加国际化消息
@@ -58,7 +39,7 @@ public class I18nController extends BasicController{
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public Response add(I18nMessage message) {
 		if(validate(message) == DataValidationResult.SUCCESS) {
-			updateService.insert(message);
+			messageUpdateService.insert(message);
 		}
 		return ResponseContext.getFinalResponse();
 	}
@@ -71,7 +52,7 @@ public class I18nController extends BasicController{
 	@RequestMapping(value="/adds", method=RequestMethod.POST)
 	public Response add(List<I18nMessage> messages) {
 		if(validate(messages) == DataValidationResult.SUCCESS) {
-			updateService.insert(messages);
+			messageUpdateService.insert(messages);
 		}
 		return ResponseContext.getFinalBatchResponse();
 	}
@@ -84,7 +65,7 @@ public class I18nController extends BasicController{
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public Response update(I18nMessage message) {
 		if(validate(message) == DataValidationResult.SUCCESS) {
-			updateService.update(message);
+			messageUpdateService.update(message);
 		}
 		return ResponseContext.getFinalResponse();
 	}
@@ -97,7 +78,7 @@ public class I18nController extends BasicController{
 	@RequestMapping(value="/updates", method=RequestMethod.POST)
 	public Response update(List<I18nMessage> messages) {
 		if(validate(messages) == DataValidationResult.SUCCESS) {
-			updateService.update(messages);
+			messageUpdateService.update(messages);
 		}
 		return ResponseContext.getFinalBatchResponse();
 	}
@@ -110,7 +91,7 @@ public class I18nController extends BasicController{
 	public Response deleteByIds(HttpServletRequest request) {
 		String ids = getDeleteIds(request);
 		if(ids != null) {
-			updateService.deleteByIds(ids);
+			messageUpdateService.deleteByIds(ids);
 		}
 		return ResponseContext.getFinalBatchResponse();
 	}
