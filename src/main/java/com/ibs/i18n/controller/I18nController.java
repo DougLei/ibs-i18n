@@ -108,8 +108,8 @@ public class I18nController extends BasicController{
 	 */
 	@RequestMapping(value="/delete", method=RequestMethod.DELETE)
 	public Response deleteByIds(HttpServletRequest request) {
-		String ids = request.getParameter(deleteIdsKey);
-		if(validateByValidator(ids, validateIdsNotNullWhenDelete) == DataValidationResult.SUCCESS) {
+		String ids = getDeleteIds(request);
+		if(ids != null) {
 			updateService.deleteByIds(ids);
 		}
 		return ResponseContext.getFinalBatchResponse();
