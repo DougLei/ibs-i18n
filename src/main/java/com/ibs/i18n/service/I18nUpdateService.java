@@ -12,7 +12,7 @@ import com.ibs.dynamic.table.DynamicTableIndexContext;
 import com.ibs.i18n.entity.I18nMessage;
 import com.ibs.parent.code.entity.BasicProperty;
 import com.ibs.parent.code.service.BasicService;
-import com.ibs.parent.code.service.validator.SValidator;
+import com.ibs.parent.code.service.validator.ServiceValidator;
 import com.ibs.parent.code.validator.DataValidationResult;
 
 /**
@@ -81,7 +81,7 @@ public class I18nUpdateService extends BasicService{
 }
 
 // 在添加时验证code和language唯一
-class ValidateCodeAndLanguageUniqueWhenAdd implements SValidator<I18nMessage> {
+class ValidateCodeAndLanguageUniqueWhenAdd implements ServiceValidator<I18nMessage> {
 	
 	@Override
 	public ValidationResult doValidate(I18nMessage i18nMessage, List<I18nMessage> originValidateDatas, Session session, String projectId, String customerId, String databaseId) {
@@ -94,7 +94,7 @@ class ValidateCodeAndLanguageUniqueWhenAdd implements SValidator<I18nMessage> {
 }
 
 // 在修改时验证code和language唯一
-class ValidateCodeAndLanguageUniqueWhenUpdate implements SValidator<I18nMessage> {
+class ValidateCodeAndLanguageUniqueWhenUpdate implements ServiceValidator<I18nMessage> {
 
 	@Override
 	public ValidationResult doValidate(I18nMessage i18nMessage, List<I18nMessage> originValidateDatas, Session session, String projectId, String customerId, String databaseId) {
