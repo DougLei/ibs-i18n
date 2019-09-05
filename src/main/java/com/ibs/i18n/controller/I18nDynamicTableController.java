@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.douglei.orm.core.metadata.validator.ValidationResult;
 import com.douglei.tools.utils.StringUtil;
 import com.ibs.i18n.service.I18nDynamicTableService;
-import com.ibs.i18n.service.I18nMessageUpdateService;
 import com.ibs.parent.code.controller.BasicController;
 import com.ibs.parent.code.controller.validator.ControllerValidator;
 import com.ibs.parent.code.validator.DataValidationResult;
@@ -36,7 +35,7 @@ public class I18nDynamicTableController extends BasicController{
 	@RequestMapping(value="/initial/{projectId}", method=RequestMethod.GET)
 	public Response initial(String projectId) {
 		if(validateByValidator(projectId, validateProjectIdNotNullWhenInitial) == DataValidationResult.SUCCESS) {
-			// TODO
+			dynamicTableService.initial(projectId);
 		}
 		return ResponseContext.getFinalResponse();
 	}
@@ -49,7 +48,7 @@ public class I18nDynamicTableController extends BasicController{
 	@RequestMapping(value="/destroy/{projectId}", method=RequestMethod.GET)
 	public Response destroy(String projectId) {
 		if(validateByValidator(projectId, validateProjectIdNotNullWhenDestroy) == DataValidationResult.SUCCESS) {
-			// TODO
+			dynamicTableService.destroy(projectId);
 		}
 		return ResponseContext.getFinalResponse();
 	}
