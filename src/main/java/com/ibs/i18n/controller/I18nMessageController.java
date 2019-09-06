@@ -136,8 +136,9 @@ public class I18nMessageController extends BasicController{
 	 * @return 返回的文件名为 language_时间戳.properties
 	 */
 	@RequestMapping(value="download/{language}", method=RequestMethod.GET)
-	public Response download(String language) {
+	public Object download(String language) {
 		// TODO 下载指定language的国际化消息配置文件
+		// 在服务器指定目录下也有下载文件的缓存--- .../i18n-download-cache/{projectId}/lanuage_时间戳.properties
 		return ResponseContext.getFinalResponse();
 	}
 }
