@@ -9,7 +9,5 @@ import com.douglei.orm.context.transaction.component.TransactionComponent;
 @TransactionComponent
 public class I18nMessageQueryService {
 	
-	public void test() {
-		
-	}
+	
 }

@@ -95,4 +95,26 @@ public class I18nMessageController extends BasicController{
 		}
 		return ResponseContext.getFinalBatchResponse();
 	}
+	
+	
+	/**
+	 * 查询指定code的国际化消息, 返回所有语言
+	 * @param code
+	 * @return
+	 */
+	@RequestMapping(value="query/{code}", method=RequestMethod.GET)
+	public Response query(String code) {
+		return ResponseContext.getFinalBatchResponse();
+	}
+	
+	/**
+	 * 查询指定language, 指定code的国际化消息
+	 * @param code
+	 * @param language
+	 * @return
+	 */
+	@RequestMapping(value="query/{language}/{code}", method=RequestMethod.GET)
+	public Response query(String language, String code) {
+		return ResponseContext.getFinalResponse();
+	}
 }
