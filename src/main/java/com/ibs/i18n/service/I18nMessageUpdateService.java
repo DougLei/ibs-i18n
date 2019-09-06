@@ -12,7 +12,7 @@ import com.ibs.dynamic.table.DynamicTableIndexContext;
 import com.ibs.i18n.entity.I18nMessage;
 import com.ibs.parent.code.entity.BasicProperty;
 import com.ibs.parent.code.service.BasicService;
-import com.ibs.parent.code.service.validator.ServiceValidator;
+import com.ibs.parent.code.service.ServiceValidator;
 import com.ibs.parent.code.validator.DataValidationResult;
 
 /**
@@ -23,8 +23,8 @@ import com.ibs.parent.code.validator.DataValidationResult;
 public class I18nMessageUpdateService extends BasicService{
 	private static final BasicProperty[] basicPropertiesOnSave = {BasicProperty.CREATE_USER_ID, BasicProperty.CREATE_USER_NAME, BasicProperty.CREATE_DATE, BasicProperty.LAST_UPDATE_USER_ID, BasicProperty.LAST_UPDATE_USER_NAME, BasicProperty.LAST_UPDATE_DATE};
 	private static final BasicProperty[] basicPropertiesOnUpdate = {BasicProperty.LAST_UPDATE_USER_ID, BasicProperty.LAST_UPDATE_USER_NAME, BasicProperty.LAST_UPDATE_DATE};
-	private static final ValidateCodeAndLanguageUniqueWhenAdd validateCodeAndLanguageUniqueWhenAdd = new ValidateCodeAndLanguageUniqueWhenAdd();
-	private static final ValidateCodeAndLanguageUniqueWhenUpdate validateCodeAndLanguageUniqueWhenUpdate = new ValidateCodeAndLanguageUniqueWhenUpdate();
+	private static final CodeAndLanguageUniqueWhenAddValidator codeAndLanguageUniqueWhenAddValidator = new CodeAndLanguageUniqueWhenAddValidator();
+	private static final CodeAndLanguageUniqueWhenUpdateValidator codeAndLanguageUniqueWhenUpdateValidator = new CodeAndLanguageUniqueWhenUpdateValidator();
 	
 	/**
 	 * 添加国际化消息
@@ -32,7 +32,7 @@ public class I18nMessageUpdateService extends BasicService{
 	 */
 	@Transaction
 	public void insert(I18nMessage message) {
-		if(validateByValidator(message, validateCodeAndLanguageUniqueWhenAdd) == DataValidationResult.SUCCESS) {
+		if(validateByValidator(message, codeAndLanguageUniqueWhenAddValidator) == DataValidationResult.SUCCESS) {
 			tableSessionSave(message, basicPropertiesOnSave);
 		}
 	}
@@ -43,7 +43,7 @@ public class I18nMessageUpdateService extends BasicService{
 	 */
 	@Transaction
 	public void insert(List<I18nMessage> messages) {
-		if(validateByValidator(messages, validateCodeAndLanguageUniqueWhenAdd) == DataValidationResult.SUCCESS) {
+		if(validateByValidator(messages, codeAndLanguageUniqueWhenAddValidator) == DataValidationResult.SUCCESS) {
 			tableSessionSave(messages, basicPropertiesOnSave);
 		}
 	}
@@ -54,7 +54,7 @@ public class I18nMessageUpdateService extends BasicService{
 	 */
 	@Transaction
 	public void update(I18nMessage message) {
-		if(validateByValidator(message, validateCodeAndLanguageUniqueWhenUpdate) == DataValidationResult.SUCCESS) {
+		if(validateByValidator(message, codeAndLanguageUniqueWhenUpdateValidator) == DataValidationResult.SUCCESS) {
 			tableSessionUpdate(message, basicPropertiesOnUpdate);
 		}
 	}
@@ -65,7 +65,7 @@ public class I18nMessageUpdateService extends BasicService{
 	 */
 	@Transaction
 	public void update(List<I18nMessage> messages) {
-		if(validateByValidator(messages, validateCodeAndLanguageUniqueWhenUpdate) == DataValidationResult.SUCCESS) {
+		if(validateByValidator(messages, codeAndLanguageUniqueWhenUpdateValidator) == DataValidationResult.SUCCESS) {
 			tableSessionUpdate(messages, basicPropertiesOnUpdate);
 		}
 	}
@@ -81,7 +81,7 @@ public class I18nMessageUpdateService extends BasicService{
 }
 
 // 在添加时验证code和language唯一
-class ValidateCodeAndLanguageUniqueWhenAdd implements ServiceValidator<I18nMessage> {
+class CodeAndLanguageUniqueWhenAddValidator implements ServiceValidator<I18nMessage> {
 	
 	@Override
 	public ValidationResult doValidate(I18nMessage i18nMessage, List<I18nMessage> originValidateDatas, Session session, String projectId, String customerId, String databaseId) {
@@ -94,7 +94,7 @@ class ValidateCodeAndLanguageUniqueWhenAdd implements ServiceValidator<I18nMessa
 }
 
 // 在修改时验证code和language唯一
-class ValidateCodeAndLanguageUniqueWhenUpdate implements ServiceValidator<I18nMessage> {
+class CodeAndLanguageUniqueWhenUpdateValidator implements ServiceValidator<I18nMessage> {
 
 	@Override
 	public ValidationResult doValidate(I18nMessage i18nMessage, List<I18nMessage> originValidateDatas, Session session, String projectId, String customerId, String databaseId) {

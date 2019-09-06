@@ -5,16 +5,15 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.ibs.i18n.entity.I18nMessage;
 import com.ibs.i18n.service.I18nMessageQueryService;
 import com.ibs.i18n.service.I18nMessageUpdateService;
 import com.ibs.parent.code.controller.BasicController;
+import com.ibs.parent.code.controller.validators.ParameterNotBlankValidator;
 import com.ibs.parent.code.validator.DataValidationResult;
 import com.ibs.response.Response;
 import com.ibs.response.ResponseContext;
@@ -23,9 +22,11 @@ import com.ibs.response.ResponseContext;
  * 
  * @author DougLei
  */
-@Controller
+@RestController
 @RequestMapping("/i18n/message")
 public class I18nMessageController extends BasicController{
+	private static final ParameterNotBlankValidator codesNotBlankValidator = new ParameterNotBlankValidator("codes");
+	private static final ParameterNotBlankValidator languageNotBlankValidator = new ParameterNotBlankValidator("language");
 	
 	@Autowired
 	private I18nMessageQueryService messageQueryService;
@@ -38,7 +39,6 @@ public class I18nMessageController extends BasicController{
 	 * @param message
 	 * @return
 	 */
-	@ResponseBody
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public Response add(I18nMessage message) {
 		if(validate(message) == DataValidationResult.SUCCESS) {
@@ -52,7 +52,6 @@ public class I18nMessageController extends BasicController{
 	 * @param messages
 	 * @return
 	 */
-	@ResponseBody
 	@RequestMapping(value="/adds", method=RequestMethod.POST)
 	public Response add(List<I18nMessage> messages) {
 		if(validate(messages) == DataValidationResult.SUCCESS) {
@@ -66,7 +65,6 @@ public class I18nMessageController extends BasicController{
 	 * @param message
 	 * @return
 	 */
-	@ResponseBody
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public Response update(I18nMessage message) {
 		if(validate(message) == DataValidationResult.SUCCESS) {
@@ -80,7 +78,6 @@ public class I18nMessageController extends BasicController{
 	 * @param messages
 	 * @return
 	 */
-	@ResponseBody
 	@RequestMapping(value="/updates", method=RequestMethod.POST)
 	public Response update(List<I18nMessage> messages) {
 		if(validate(messages) == DataValidationResult.SUCCESS) {
@@ -93,7 +90,6 @@ public class I18nMessageController extends BasicController{
 	 * 删除国际化消息
 	 * @return
 	 */
-	@ResponseBody
 	@RequestMapping(value="/delete", method=RequestMethod.DELETE)
 	public Response deleteByIds(HttpServletRequest request) {
 		String ids = getDeleteIds(request);
@@ -106,28 +102,16 @@ public class I18nMessageController extends BasicController{
 	
 	/**
 	 * 查询指定code, 所有语言的的国际化消息
+	 * 多个code用,分割
 	 * @param code
 	 * @return
 	 */
-	@ResponseBody
-	@RequestMapping(value="query/{code}", method=RequestMethod.GET)
-	public Response query(String code) {
-		// TODO 查询指定code, 所有语言的的国际化消息
+	@RequestMapping(value="query/{codes}", method=RequestMethod.GET)
+	public Response queryByCodes(String codes) {
+		if(validateByValidator(codes, codesNotBlankValidator) == DataValidationResult.SUCCESS) {
+			messageQueryService.queryByCodes(codes.split(","));
+		}
 		return ResponseContext.getFinalBatchResponse();
-	}
-	
-	/**
-	 * 查询指定language, 指定code的的国际化消息
-	 * code多个用, 分割
-	 * @param code
-	 * @param language
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(value="query/{language}/{code}", method=RequestMethod.GET)
-	public Response query(@PathVariable(value="language") String language, @PathVariable(value="code") String code) {
-		// TODO 查询指定language, 指定code的的国际化消息, code多个用, 分割
-		return ResponseContext.getFinalResponse();
 	}
 	
 	/**
@@ -137,8 +121,10 @@ public class I18nMessageController extends BasicController{
 	 */
 	@RequestMapping(value="download/{language}", method=RequestMethod.GET)
 	public Object download(String language) {
-		// TODO 下载指定language的国际化消息配置文件
-		// 在服务器指定目录下也有下载文件的缓存--- .../i18n-download-cache/{projectId}/lanuage_时间戳.properties
+		if(validateByValidator(language, languageNotBlankValidator) == DataValidationResult.SUCCESS) {
+			// TODO 下载指定language的国际化消息配置文件
+			// 在服务器指定目录下也有下载文件的缓存--- .../i18n-download-cache/{projectId}/lanuage_时间戳.json
+		}
 		return ResponseContext.getFinalResponse();
 	}
 }
