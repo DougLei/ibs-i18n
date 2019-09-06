@@ -10,7 +10,7 @@ import com.ibs.parent.code.entity.Entity;
  */
 public class I18nMessage implements Entity{
 	private static final long serialVersionUID = -4051860514204245923L;
-
+	
 	private int id;// 主键
 	
 	private String code;// 编码

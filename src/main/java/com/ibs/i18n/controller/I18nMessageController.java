@@ -101,7 +101,7 @@ public class I18nMessageController extends BasicController{
 	
 	
 	/**
-	 * 查询指定code, 所有语言的的国际化消息
+	 * 查询指定codes, 所有语言的的国际化消息
 	 * 多个code用,分割
 	 * @param code
 	 * @return
