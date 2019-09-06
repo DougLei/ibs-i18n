@@ -13,8 +13,9 @@ import com.ibs.dynamic.table.DynamicTableService;
  */
 @TransactionComponent
 public class I18nDynamicTableService {
-	private static final String i18nMessageTableTemplate = new ResourcesReader("mappings/I18nMessage.tmp.xml.template").readAll(1500).toString();
+	private static final String name = "i18n";
 	private static final String i18nMessageTableCode = "I18N_MESSAGE_";
+	private static final String i18nMessageTableTemplate = new ResourcesReader("mappings/I18nMessage.tmp.xml.template").readAll(1500).toString();
 	
 	@Autowired
 	private DynamicTableService service;
@@ -24,7 +25,7 @@ public class I18nDynamicTableService {
 	 */
 	@Transaction
 	public synchronized void start() {
-		service.start("i18n", i18nMessageTableTemplate);
+		service.start(name, i18nMessageTableTemplate);
 	}
 	
 	/**
@@ -32,7 +33,7 @@ public class I18nDynamicTableService {
 	 */
 	@Transaction
 	public synchronized void initial() {
-		service.initial("i18n", i18nMessageTableTemplate);
+		service.initial(name, i18nMessageTableTemplate);
 	}
 	
 	/**
@@ -40,6 +41,6 @@ public class I18nDynamicTableService {
 	 */
 	@Transaction
 	public synchronized void destroy() {
-		service.destroy("i18n", i18nMessageTableCode);
+		service.destroy(name, i18nMessageTableCode);
 	}
 }

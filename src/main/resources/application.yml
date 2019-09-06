@@ -6,3 +6,11 @@ ibs:
     filter:
       enable-dynamic-table-filter: true
       dynamic-table-name: I18N_DYNAMIC_TABLE
+
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;DatabaseName=douglei
+    username: sa
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
