@@ -53,5 +53,9 @@ public class I18nMessageQueryService extends DownloadService{
 	public void downloadByLanguage(String language, HttpServletResponse response) {
 		// TODO 下载指定language的国际化消息配置文件
 		// 在服务器指定目录下也有下载文件的缓存--- .../i18n-download-cache/{projectId}/lanuage_时间戳.json
+		
+		
+		// 去查询
+		
 	}
 }
