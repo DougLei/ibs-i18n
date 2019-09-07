@@ -101,7 +101,6 @@ public class I18nMessageController extends BasicController{
 		return ResponseContext.getFinalBatchResponse();
 	}
 	
-	
 	/**
 	 * 查询指定codes, 所有语言的的国际化消息
 	 * 多个code用,分割
