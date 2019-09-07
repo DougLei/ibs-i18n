@@ -3,8 +3,10 @@ package com.ibs.i18n.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -117,13 +119,13 @@ public class I18nMessageController extends BasicController{
 	/**
 	 * 下载指定language的国际化消息配置文件
 	 * @param language 可以只是language名, 或language_时间戳(即之前下载的文件名), 这种情况会先去判断是否有文件更新, 如果有更新, 再重新下载, 否则不进行无用的下载
-	 * @return 返回的文件名为 language_时间戳.properties
+	 * @param response
+	 * @return 返回的文件名为 language_时间戳.json
 	 */
 	@RequestMapping(value="download/{language}", method=RequestMethod.GET)
-	public Object download(String language) {
+	public Object downloadByLanguage(@PathVariable(name="language") String language, HttpServletResponse response) {
 		if(validateByValidator(language, languageNotBlankValidator) == DataValidationResult.SUCCESS) {
-			// TODO 下载指定language的国际化消息配置文件
-			// 在服务器指定目录下也有下载文件的缓存--- .../i18n-download-cache/{projectId}/lanuage_时间戳.json
+			messageQueryService.downloadByLanguage(language, response);
 		}
 		return ResponseContext.getFinalResponse();
 	}
