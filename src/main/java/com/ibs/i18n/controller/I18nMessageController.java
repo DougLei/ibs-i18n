@@ -16,6 +16,7 @@ import com.ibs.i18n.service.I18nMessageQueryService;
 import com.ibs.i18n.service.I18nMessageUpdateService;
 import com.ibs.parent.code.controller.BasicController;
 import com.ibs.parent.code.controller.validators.ParameterNotBlankValidator;
+import com.ibs.parent.code.service.download.DownloadFileException;
 import com.ibs.parent.code.validator.DataValidationResult;
 import com.ibs.response.Response;
 import com.ibs.response.ResponseContext;
@@ -120,12 +121,12 @@ public class I18nMessageController extends BasicController{
 	 * @param language 
 	 * @param response
 	 * @return 
+	 * @throws DownloadFileException 
 	 */
 	@RequestMapping(value="download/{language}", method=RequestMethod.GET)
-	public Object downloadByLanguage(@PathVariable(name="language") String language, HttpServletResponse response) {
+	public void downloadByLanguage(@PathVariable(name="language") String language, HttpServletResponse response) throws DownloadFileException {
 		if(validateByValidator(language, languageNotBlankValidator) == DataValidationResult.SUCCESS) {
 			messageQueryService.downloadByLanguage(language, response);
 		}
-		return ResponseContext.getFinalResponse();
 	}
 }
