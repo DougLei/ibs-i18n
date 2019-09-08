@@ -117,9 +117,9 @@ public class I18nMessageController extends BasicController{
 	
 	/**
 	 * 下载指定language的国际化消息配置文件
-	 * @param language 可以只是language名, 或language_时间戳(即之前下载的文件名), 这种情况会先去判断是否有文件更新, 如果有更新, 再重新下载, 否则不进行无用的下载
+	 * @param language 
 	 * @param response
-	 * @return 返回的文件名为 language_时间戳.json
+	 * @return 
 	 */
 	@RequestMapping(value="download/{language}", method=RequestMethod.GET)
 	public Object downloadByLanguage(@PathVariable(name="language") String language, HttpServletResponse response) {
