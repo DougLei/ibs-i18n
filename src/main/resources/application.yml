@@ -11,6 +11,11 @@ ibs:
       enable-dynamic-table-filter: true
     dynamic:
       table:
+        project-name: i18n
+        mapping-template-resource-paths:
+        - mappings/I18nMessage.tmp.xml.template
+        mapping-codes:
+        - I18N_MESSAGE_
         name: I18N_DYNAMIC_TABLE
         count-ceiling: 500
         warn-count-ceiling: 450

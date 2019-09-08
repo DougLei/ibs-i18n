@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ibs.i18n.service.I18nDynamicTableService;
+import com.ibs.dynamic.table.DynamicTableService;
 import com.ibs.parent.code.controller.BasicController;
 import com.ibs.response.Response;
 import com.ibs.response.ResponseContext;
@@ -19,7 +19,7 @@ import com.ibs.response.ResponseContext;
 public class I18nDynamicTableController extends BasicController{
 	
 	@Autowired
-	private I18nDynamicTableService dynamicTableService;
+	private DynamicTableService service;
 	
 	/**
 	 * 初始化指定项目的I18nMessage表
@@ -27,7 +27,7 @@ public class I18nDynamicTableController extends BasicController{
 	 */
 	@RequestMapping(value="/initial", method=RequestMethod.GET)
 	public Response initial() {
-		dynamicTableService.initial();
+		service.initial();
 		return ResponseContext.getFinalResponse();
 	}
 	
@@ -37,7 +37,7 @@ public class I18nDynamicTableController extends BasicController{
 	 */
 	@RequestMapping(value="/destroy", method=RequestMethod.GET)
 	public Response destroy() {
-		dynamicTableService.destroy();
+		service.destroy();
 		return ResponseContext.getFinalResponse();
 	}
 }

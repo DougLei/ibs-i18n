@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.ibs.i18n.service.I18nDynamicTableService;
+import com.ibs.dynamic.table.DynamicTableService;
 
 /**
  * 
@@ -15,7 +15,7 @@ import com.ibs.i18n.service.I18nDynamicTableService;
 public class IbsI18nApplication {
 
 	@Autowired
-	private I18nDynamicTableService service;
+	private DynamicTableService service;
 	
 	@Bean
 	public void start() {

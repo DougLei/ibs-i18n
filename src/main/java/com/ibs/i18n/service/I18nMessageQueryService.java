@@ -5,10 +5,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.douglei.i18n.I18nMessage;
 import com.douglei.orm.context.SessionContext;
 import com.douglei.orm.context.transaction.component.Transaction;
 import com.douglei.orm.context.transaction.component.TransactionComponent;
+import com.ibs.dynamic.table.DynamicTableConfigurationProperties;
+import com.ibs.dynamic.table.DynamicTableIndexContext;
 import com.ibs.parent.code.service.DownloadService;
 import com.ibs.response.ResponseContext;
 
@@ -18,7 +22,18 @@ import com.ibs.response.ResponseContext;
  */
 @TransactionComponent
 public class I18nMessageQueryService extends DownloadService{
-
+	
+	@Autowired
+	private DynamicTableConfigurationProperties config;
+	
+	/**
+	 * I18nMessage表名
+	 * @return
+	 */
+	private String i18nMessageTableName() {
+		return config.getMappingCodes()[0] + DynamicTableIndexContext.getIndex();
+	}
+	
 	/**
 	 * 
 	 * @param codes
@@ -27,7 +42,7 @@ public class I18nMessageQueryService extends DownloadService{
 	public void queryByCodes(String[] codes) {
 		List<Object> parameters = new ArrayList<Object>(codes.length);
 		StringBuilder querySql = new StringBuilder(100);
-		querySql.append("select id, code, language, message, priority from ").append(I18nProperties.getI18nMessageTableName()).append(" where ");
+		querySql.append("select id, code, language, message, priority from ").append(i18nMessageTableName()).append(" where ");
 		if(codes.length == 1) {
 			parameters.add(codes[0]);
 			querySql.append("code=?");
