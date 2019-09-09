@@ -77,19 +77,19 @@ public class I18nFileService extends SystemFileService{
 	// 创建i18n文件
 	private void createI18nFile(String querySql, StringBuilder content, String language, FileBufferedWriter writer) throws CreateSystemFileException {
 		List<Object> parameters = Collections.toList(language); 
-		PageResult<Object[]> result = SessionContext.getSqlSession().pageQuery_(1, 1, querySql, parameters);
+		PageResult<Object[]> result = SessionContext.getSqlSession().pageQuery_(1, i18nConfig.getDownloadQueryCount(), querySql, parameters);
 		if(result.getCount() > 0) {
 			writer.setFile(createFile(i18nConfig.getDownloadFile(TokenContext.getToken().getProjectId(), language)));
 			try {
 				writer.write(file_start);
 				while(true) {
-					result.getResultDatas().forEach(data -> content.append("\"").append(data[1]).append("\":\"").append(data[2]).append("\","));
+					result.getResultDatas().forEach(data -> content.append("\"").append(data[0]).append("\":\"").append(data[1]).append("\","));
 					writer.write(content.toString());
 					content.setLength(0);
 					if(result.isLastPage()) {
 						break;
 					}
-					result = SessionContext.getSqlSession().pageQuery_(result.getPageNum()+1, 1, querySql, parameters);
+					result = SessionContext.getSqlSession().pageQuery_(result.getPageNum()+1, i18nConfig.getDownloadQueryCount(), querySql, parameters);
 				}
 				writer.write(file_end);
 			} catch (IOException e) {
