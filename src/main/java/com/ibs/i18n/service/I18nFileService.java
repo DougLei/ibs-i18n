@@ -2,6 +2,7 @@ package com.ibs.i18n.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,7 +15,6 @@ import com.douglei.orm.context.transaction.component.Transaction;
 import com.douglei.orm.context.transaction.component.TransactionComponent;
 import com.douglei.orm.core.sql.pagequery.PageResult;
 import com.douglei.tools.instances.file.writer.FileBufferedWriter;
-import com.douglei.tools.utils.Collections;
 import com.ibs.IbsI18nConfigurationProperties;
 import com.ibs.parent.code.service.file.CreateSystemFileException;
 import com.ibs.parent.code.service.file.DownloadFileException;
@@ -65,18 +65,19 @@ public class I18nFileService extends SystemFileService{
 			return;
 		}
 		
-		FileBufferedWriter writer = new FileBufferedWriter();
 		String querySql = String.format(fileContentQuerySql, util.i18nMessageTableName());
+		List<Object> parameters = new ArrayList<Object>(1);
 		StringBuilder content = new StringBuilder(1024);
+		FileBufferedWriter writer = new FileBufferedWriter();
 		for (String language_ : languages) {
-			createI18nFile(querySql, content, language_, writer);
+			if(parameters.size() > 0) parameters.clear(); parameters.add(language_);
+			createI18nFile(querySql, parameters, content, writer, language_);
 		}
 		if(addResponseData) addSingleResponseData("language", Arrays.toString(languages));
 	}
 	
 	// 创建i18n文件
-	private void createI18nFile(String querySql, StringBuilder content, String language, FileBufferedWriter writer) throws CreateSystemFileException {
-		List<Object> parameters = Collections.toList(language); 
+	private void createI18nFile(String querySql, List<Object> parameters, StringBuilder content, FileBufferedWriter writer, String language) throws CreateSystemFileException {
 		PageResult<Object[]> result = SessionContext.getSqlSession().pageQuery_(1, i18nConfig.getDownloadQueryCount(), querySql, parameters);
 		if(result.getCount() > 0) {
 			writer.setFile(createFile(i18nConfig.getDownloadFile(TokenContext.getToken().getProjectId(), language)));

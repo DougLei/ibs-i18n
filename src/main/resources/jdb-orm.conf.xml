@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration id="ibs-i18n">
 	<environment>
+		<property name="enableResultCache" value="false" />
 		<property name="enableTableSessionCache" value="false" />
 		
 		<mappings>
