@@ -55,7 +55,7 @@ public class I18nMessageController extends BasicController{
 	 * @param messages
 	 * @return
 	 */
-	@RequestMapping(value="/adds", method=RequestMethod.POST)
+	@RequestMapping(value="/batchAdd", method=RequestMethod.POST)
 	public Response add(List<I18nMessage> messages) {
 		if(validate(messages) == DataValidationResult.SUCCESS) {
 			messageUpdateService.insert(messages);
@@ -81,7 +81,7 @@ public class I18nMessageController extends BasicController{
 	 * @param messages
 	 * @return
 	 */
-	@RequestMapping(value="/updates", method=RequestMethod.POST)
+	@RequestMapping(value="/batchUpdate", method=RequestMethod.POST)
 	public Response update(List<I18nMessage> messages) {
 		if(validate(messages) == DataValidationResult.SUCCESS) {
 			messageUpdateService.update(messages);

@@ -1,6 +1,7 @@
 package com.ibs.i18n.service;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +76,10 @@ public class I18nMessageQueryService extends DownloadService{
 	 */
 	public void downloadByLanguage(String language, HttpServletResponse response) throws DownloadFileException {
 		File file = i18nConfig.getDownloadFile(TokenContext.getToken().getProjectId(), language);
+		if(!file.exists()) {
+			// TODO 创建出来
+			
+		}
 		download(response, file);
 	}
 }
