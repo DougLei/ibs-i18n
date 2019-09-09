@@ -3,10 +3,8 @@ package com.ibs.i18n.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +14,6 @@ import com.ibs.i18n.service.I18nMessageQueryService;
 import com.ibs.i18n.service.I18nMessageUpdateService;
 import com.ibs.parent.code.controller.BasicController;
 import com.ibs.parent.code.controller.validators.ParameterNotBlankValidator;
-import com.ibs.parent.code.service.download.DownloadFileException;
 import com.ibs.parent.code.validator.DataValidationResult;
 import com.ibs.response.Response;
 import com.ibs.response.ResponseContext;
@@ -29,7 +26,6 @@ import com.ibs.response.ResponseContext;
 @RequestMapping("/i18n/message")
 public class I18nMessageController extends BasicController{
 	private static final ParameterNotBlankValidator codesNotBlankValidator = new ParameterNotBlankValidator("codes");
-	private static final ParameterNotBlankValidator languageNotBlankValidator = new ParameterNotBlankValidator("language");
 	
 	@Autowired
 	private I18nMessageQueryService messageQueryService;
@@ -99,7 +95,7 @@ public class I18nMessageController extends BasicController{
 		if(ids != null) {
 			messageUpdateService.deleteByIds(ids);
 		}
-		return ResponseContext.getFinalBatchResponse();
+		return ResponseContext.getFinalResponse();
 	}
 	
 	/**
@@ -114,19 +110,5 @@ public class I18nMessageController extends BasicController{
 			messageQueryService.queryByCodes(codes.split(","));
 		}
 		return ResponseContext.getFinalBatchResponse();
-	}
-	
-	/**
-	 * 下载指定language的国际化消息配置文件
-	 * @param language 
-	 * @param response
-	 * @return 
-	 * @throws DownloadFileException 
-	 */
-	@RequestMapping(value="download/{language}", method=RequestMethod.GET)
-	public void downloadByLanguage(@PathVariable(name="language") String language, HttpServletResponse response) throws DownloadFileException {
-		if(validateByValidator(language, languageNotBlankValidator) == DataValidationResult.SUCCESS) {
-			messageQueryService.downloadByLanguage(language, response);
-		}
 	}
 }

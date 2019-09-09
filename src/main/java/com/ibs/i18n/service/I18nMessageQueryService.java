@@ -1,11 +1,7 @@
 package com.ibs.i18n.service;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,34 +9,17 @@ import com.douglei.i18n.I18nMessage;
 import com.douglei.orm.context.SessionContext;
 import com.douglei.orm.context.transaction.component.Transaction;
 import com.douglei.orm.context.transaction.component.TransactionComponent;
-import com.ibs.IbsI18nConfigurationProperties;
-import com.ibs.dynamic.table.DynamicTableConfigurationProperties;
-import com.ibs.dynamic.table.DynamicTableIndexContext;
-import com.ibs.parent.code.service.download.DownloadFileException;
-import com.ibs.parent.code.service.download.DownloadService;
 import com.ibs.response.ResponseContext;
-import com.ibs.token.TokenContext;
 
 /**
  * 
  * @author DougLei
  */
 @TransactionComponent
-public class I18nMessageQueryService extends DownloadService{
+public class I18nMessageQueryService {
 	
 	@Autowired
-	private DynamicTableConfigurationProperties config;
-	
-	@Autowired
-	private IbsI18nConfigurationProperties i18nConfig;
-	
-	/**
-	 * I18nMessage表名
-	 * @return
-	 */
-	private String i18nMessageTableName() {
-		return config.getMappingCodes()[0] + DynamicTableIndexContext.getIndex();
-	}
+	private I18nUtilService util;
 	
 	/**
 	 * 
@@ -50,7 +29,7 @@ public class I18nMessageQueryService extends DownloadService{
 	public void queryByCodes(String[] codes) {
 		List<Object> parameters = new ArrayList<Object>(codes.length);
 		StringBuilder querySql = new StringBuilder(100);
-		querySql.append("select id, code, language, message, priority from ").append(i18nMessageTableName()).append(" where ");
+		querySql.append("select id, code, language, message, priority from ").append(util.i18nMessageTableName()).append(" where ");
 		if(codes.length == 1) {
 			parameters.add(codes[0]);
 			querySql.append("code=?");
@@ -66,20 +45,5 @@ public class I18nMessageQueryService extends DownloadService{
 			querySql.append(")");
 		}
 		ResponseContext.addData(SessionContext.getSqlSession().query(I18nMessage.class, querySql.toString(), parameters));
-	}
-
-	/**
-	 * 
-	 * @param language
-	 * @param response 
-	 * @throws DownloadFileException 
-	 */
-	public void downloadByLanguage(String language, HttpServletResponse response) throws DownloadFileException {
-		File file = i18nConfig.getDownloadFile(TokenContext.getToken().getProjectId(), language);
-		if(!file.exists()) {
-			// TODO 创建出来
-			
-		}
-		download(response, file);
 	}
 }
