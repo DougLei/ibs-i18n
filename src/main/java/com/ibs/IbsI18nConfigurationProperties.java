@@ -16,6 +16,9 @@ public class IbsI18nConfigurationProperties {
 	// 要下载文件的路径, 使用绝对路径
 	private String downloadFilePath = System.getProperty("user.home") + File.separatorChar + "i18n-download" + File.separatorChar;
 	
+	// 下载时查询数据的数量
+	private short downloadQueryCount = 200;
+	
 	/**
 	 * 获取要下载的文件
 	 * @param projectId
@@ -30,5 +33,11 @@ public class IbsI18nConfigurationProperties {
 	}
 	public void setDownloadFilePath(String downloadFilePath) {
 		this.downloadFilePath = downloadFilePath + File.separatorChar + "i18n-download" + File.separatorChar;
+	}
+	public short getDownloadQueryCount() {
+		return downloadQueryCount;
+	}
+	public void setDownloadQueryCount(short downloadQueryCount) {
+		this.downloadQueryCount = downloadQueryCount;
 	}
 }

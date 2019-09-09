@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ibs.i18n.service.I18nFileService;
 import com.ibs.parent.code.controller.BasicController;
 import com.ibs.parent.code.controller.validators.ParameterNotBlankValidator;
+import com.ibs.parent.code.service.file.CreateSystemFileException;
 import com.ibs.parent.code.service.file.DownloadFileException;
 import com.ibs.parent.code.validator.DataValidationResult;
 import com.ibs.response.Response;
@@ -29,14 +30,15 @@ public class I18nFileController extends BasicController{
 	private I18nFileService service;
 	
 	/**
-	 * 更新国际化文件
-	 * @param language 更新指定language的文件, 或传入all, 更新所有language的文件
+	 * 创建国际化文件
+	 * @param language 创建指定language的文件, 或传入all, 创建所有language的文件
 	 * @return
+	 * @throws CreateSystemFileException 
 	 */
-	@RequestMapping(value="{language}/file/update", method=RequestMethod.GET)
-	public Response updateI18nFile(String language) {
+	@RequestMapping(value="{language}/file/create", method=RequestMethod.GET)
+	public Response createI18nFile(String language) throws CreateSystemFileException {
 		if(validateByValidator(language, languageNotBlankValidator) == DataValidationResult.SUCCESS) {
-			service.updateI18nFile(language, true);
+			service.createI18nFile(language, true);
 		}
 		return ResponseContext.getFinalResponse();
 	}
@@ -48,9 +50,10 @@ public class I18nFileController extends BasicController{
 	 * @param response
 	 * @return 
 	 * @throws DownloadFileException 
+	 * @throws CreateSystemFileException 
 	 */
 	@RequestMapping(value="{language}/download", method=RequestMethod.GET)
-	public void downloadByLanguage(@PathVariable(name="language") String language, HttpServletResponse response) throws DownloadFileException {
+	public void downloadByLanguage(@PathVariable(name="language") String language, HttpServletResponse response) throws DownloadFileException, CreateSystemFileException {
 		if(validateByValidator(language, languageNotBlankValidator) == DataValidationResult.SUCCESS) {
 			service.downloadByLanguage(language, response);
 		}
