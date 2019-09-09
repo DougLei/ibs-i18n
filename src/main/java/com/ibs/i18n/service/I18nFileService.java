@@ -2,7 +2,6 @@ package com.ibs.i18n.service;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,9 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.douglei.orm.context.SessionContext;
+import com.douglei.orm.context.transaction.component.Transaction;
 import com.douglei.orm.context.transaction.component.TransactionComponent;
 import com.douglei.orm.core.sql.pagequery.PageResult;
 import com.douglei.tools.instances.file.writer.FileBufferedWriter;
+import com.douglei.tools.utils.Collections;
 import com.ibs.IbsI18nConfigurationProperties;
 import com.ibs.parent.code.service.file.CreateSystemFileException;
 import com.ibs.parent.code.service.file.DownloadFileException;
@@ -27,6 +28,11 @@ import com.ibs.token.TokenContext;
 @TransactionComponent
 public class I18nFileService extends SystemFileService{
 	private static final String fileContentQuerySql = "select code, message from %s where language=?";
+	private static final char file_start = '{';
+	private static final String file_end = "\"\":\"\"}";
+	
+	@Autowired
+	private I18nFileService self;
 	
 	@Autowired
 	private I18nUtilService util;
@@ -40,6 +46,7 @@ public class I18nFileService extends SystemFileService{
 	 * @param addResponseData 是否添加响应数据
 	 * @throws CreateSystemFileException 
 	 */
+	@Transaction
 	public void createI18nFile(String language, boolean addResponseData) throws CreateSystemFileException {
 		String[] languages = null;
 		if(language.equalsIgnoreCase("all")) {
@@ -60,38 +67,39 @@ public class I18nFileService extends SystemFileService{
 		
 		FileBufferedWriter writer = new FileBufferedWriter();
 		String querySql = String.format(fileContentQuerySql, util.i18nMessageTableName());
-		List<Object> parameters = new ArrayList<Object>(1);
 		StringBuilder content = new StringBuilder(1024);
 		for (String language_ : languages) {
-			if(parameters.size() > 0) parameters.clear(); parameters.add(language_);
-			if(content.length() > 0) content.setLength(0);
-			createI18nFile(querySql, parameters, content, language_, writer);
+			createI18nFile(querySql, content, language_, writer);
 		}
 		if(addResponseData) addSingleResponseData("language", Arrays.toString(languages));
 	}
 	
-	private void createI18nFile(String querySql, List<Object> parameters, StringBuilder content, String language, FileBufferedWriter writer) throws CreateSystemFileException {
-		PageResult<Object[]> result = SessionContext.getSqlSession().pageQuery_(1, i18nConfig.getDownloadQueryCount(), querySql, parameters);
+	// 创建i18n文件
+	private void createI18nFile(String querySql, StringBuilder content, String language, FileBufferedWriter writer) throws CreateSystemFileException {
+		List<Object> parameters = Collections.toList(language); 
+		PageResult<Object[]> result = SessionContext.getSqlSession().pageQuery_(1, 1, querySql, parameters);
 		if(result.getCount() > 0) {
 			writer.setFile(createFile(i18nConfig.getDownloadFile(TokenContext.getToken().getProjectId(), language)));
 			try {
-				writer.write('{');
+				writer.write(file_start);
 				while(true) {
-					result.getResultDatas().forEach(data -> content.append("\"").append(data[0]).append("\":\"").append(data[1]).append("\","));
+					result.getResultDatas().forEach(data -> content.append("\"").append(data[1]).append("\":\"").append(data[2]).append("\","));
 					writer.write(content.toString());
 					content.setLength(0);
 					if(result.isLastPage()) {
 						break;
 					}
-					result = SessionContext.getSqlSession().pageQuery_(result.getPageNum()+1, i18nConfig.getDownloadQueryCount(), querySql, parameters);
+					result = SessionContext.getSqlSession().pageQuery_(result.getPageNum()+1, 1, querySql, parameters);
 				}
-				writer.write("\"_end\":\"_end\"");
+				writer.write(file_end);
 			} catch (IOException e) {
 				throw new CreateSystemFileException(writer.getTargetFile(), e);
+			} finally {
+				writer.close();
 			}
 		}
 	}
-
+	
 	/**
 	 * 
 	 * @param language
@@ -102,7 +110,7 @@ public class I18nFileService extends SystemFileService{
 	public void downloadByLanguage(String language, HttpServletResponse response) throws DownloadFileException, CreateSystemFileException {
 		File file = i18nConfig.getDownloadFile(TokenContext.getToken().getProjectId(), language);
 		if(!file.exists()) {
-			createI18nFile(language, false);
+			self.createI18nFile(language, false);
 		}
 		download(response, file);
 	}

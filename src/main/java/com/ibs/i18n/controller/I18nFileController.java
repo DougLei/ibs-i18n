@@ -35,8 +35,8 @@ public class I18nFileController extends BasicController{
 	 * @return
 	 * @throws CreateSystemFileException 
 	 */
-	@RequestMapping(value="{language}/file/create", method=RequestMethod.GET)
-	public Response createI18nFile(String language) throws CreateSystemFileException {
+	@RequestMapping(value="{language}/create", method=RequestMethod.GET)
+	public Response createI18nFile(@PathVariable(name="language") String language) throws CreateSystemFileException {
 		if(validateByValidator(language, languageNotBlankValidator) == DataValidationResult.SUCCESS) {
 			service.createI18nFile(language, true);
 		}
