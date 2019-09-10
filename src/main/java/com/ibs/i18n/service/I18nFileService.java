@@ -80,7 +80,7 @@ public class I18nFileService extends SystemFileService{
 	private void createI18nFile(String querySql, List<Object> parameters, StringBuilder content, FileBufferedWriter writer, String language) throws CreateSystemFileException {
 		PageResult<Object[]> result = SessionContext.getSqlSession().pageQuery_(1, i18nConfig.getDownloadQueryCount(), querySql, parameters);
 		if(result.getCount() > 0) {
-			writer.setFile(createFile(i18nConfig.getDownloadFile(TokenContext.getToken().getProjectId(), language)));
+			writer.setFile(i18nConfig.getDownloadFile(TokenContext.getToken().getProjectId(), language));
 			try {
 				writer.write(file_start);
 				while(true) {
