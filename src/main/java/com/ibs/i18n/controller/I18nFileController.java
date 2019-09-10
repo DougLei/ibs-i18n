@@ -35,10 +35,10 @@ public class I18nFileController extends BasicController{
 	 * @return
 	 * @throws CreateSystemFileException 
 	 */
-	@RequestMapping(value="{language}/create", method=RequestMethod.GET)
+	@RequestMapping(value="create/{language}", method=RequestMethod.GET)
 	public Response createI18nFile(@PathVariable(name="language") String language) throws CreateSystemFileException {
 		if(validateByValidator(language, languageNotBlankValidator) == DataValidationResult.SUCCESS) {
-			service.createI18nFile(language, true);
+			service.createI18nFile(language);
 		}
 		return ResponseContext.getFinalResponse();
 	}
@@ -50,10 +50,9 @@ public class I18nFileController extends BasicController{
 	 * @param response
 	 * @return 
 	 * @throws DownloadFileException 
-	 * @throws CreateSystemFileException 
 	 */
-	@RequestMapping(value="{language}/download", method=RequestMethod.GET)
-	public void downloadByLanguage(@PathVariable(name="language") String language, HttpServletResponse response) throws DownloadFileException, CreateSystemFileException {
+	@RequestMapping(value="download/{language}", method=RequestMethod.GET)
+	public void downloadByLanguage(@PathVariable(name="language") String language, HttpServletResponse response) throws DownloadFileException {
 		if(validateByValidator(language, languageNotBlankValidator) == DataValidationResult.SUCCESS) {
 			service.downloadByLanguage(language, response);
 		}

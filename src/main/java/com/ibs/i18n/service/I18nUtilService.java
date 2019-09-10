@@ -21,7 +21,7 @@ public class I18nUtilService extends SystemFileService{
 	 * I18nMessage表名
 	 * @return
 	 */
-	protected String i18nMessageTableName() {
+	public String i18nMessageTableName() {
 		return config.getMappingCodes()[0] + DynamicTableIndexContext.getIndex();
 	}
 }
