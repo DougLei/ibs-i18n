@@ -76,7 +76,7 @@ public class I18nMessageUpdateService extends BasicService{
 	 */
 	@Transaction
 	public void deleteByIds(String ids) {
-		deleteByIds("I18N_MESSAGE_"+DynamicTableIndexContext.getIndex(), "id", ids);
+		deleteByIds("I18N_MESSAGE_"+DynamicTableIndexContext.getIndex(), ids);
 	}
 }
 
