@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.douglei.i18n.I18nMessage;
 import com.douglei.orm.context.SessionContext;
 import com.douglei.orm.context.transaction.component.Transaction;
 import com.douglei.orm.context.transaction.component.TransactionComponent;
+import com.ibs.i18n.entity.I18nMessage;
 import com.ibs.response.ResponseContext;
 
 /**
