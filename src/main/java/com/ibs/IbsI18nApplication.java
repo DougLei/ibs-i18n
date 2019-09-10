@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.ibs.dynamic.table.DynamicTableService;
+import com.ibs.dynamic.table.DynamicTableSystemAlreadyStartException;
 
 /**
  * 
@@ -18,7 +19,7 @@ public class IbsI18nApplication {
 	private DynamicTableService service;
 	
 	@Bean
-	public void start() {
+	public void start() throws DynamicTableSystemAlreadyStartException {
 		service.start();
 	}
 	
