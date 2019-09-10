@@ -19,6 +19,9 @@ ibs:
         name: I18N_DYNAMIC_TABLE
         count-ceiling: 500
         warn-count-ceiling: 450
+        skip-set-table-index-url-patterns:
+        - /i18n/dynamic/table/initial
+        - /i18n/dynamic/table/destroy
 
 spring:
   datasource:
