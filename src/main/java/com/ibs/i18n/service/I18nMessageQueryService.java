@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.douglei.i18n.I18nMessage;
 import com.douglei.orm.context.SessionContext;
 import com.douglei.orm.context.transaction.component.Transaction;
 import com.douglei.orm.context.transaction.component.TransactionComponent;
@@ -44,6 +43,6 @@ public class I18nMessageQueryService {
 			}
 			querySql.append(")");
 		}
-		ResponseContext.addData(SessionContext.getSqlSession().query(I18nMessage.class, querySql.toString(), parameters));
+		ResponseContext.addData(SessionContext.getSqlSession().query(querySql.toString(), parameters));
 	}
 }
