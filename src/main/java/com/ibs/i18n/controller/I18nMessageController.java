@@ -1,6 +1,7 @@
 package com.ibs.i18n.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ibs.i18n.entity.I18nMessage;
 import com.ibs.i18n.service.I18nMessageQueryService;
 import com.ibs.i18n.service.I18nMessageUpdateService;
 import com.ibs.parent.code.controller.BasicController;
@@ -40,7 +40,7 @@ public class I18nMessageController extends BasicController{
 	 * @return
 	 */
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public Response add(@RequestBody I18nMessage message) {
+	public Response add(@RequestBody Map<String, Object> message) {
 		if(validate(message) == DataValidationResult.SUCCESS) {
 			messageUpdateService.insert(message);
 		}
@@ -53,7 +53,7 @@ public class I18nMessageController extends BasicController{
 	 * @return
 	 */
 	@RequestMapping(value="/batchAdd", method=RequestMethod.POST)
-	public Response add(@RequestBody List<I18nMessage> messages) {
+	public Response add(@RequestBody List<Map<String, Object>> messages) {
 		if(validate(messages) == DataValidationResult.SUCCESS) {
 			messageUpdateService.insert(messages);
 		}
@@ -66,7 +66,7 @@ public class I18nMessageController extends BasicController{
 	 * @return
 	 */
 	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public Response update(@RequestBody I18nMessage message) {
+	public Response update(@RequestBody Map<String, Object> message) {
 		if(validate(message) == DataValidationResult.SUCCESS) {
 			messageUpdateService.update(message);
 		}
@@ -79,7 +79,7 @@ public class I18nMessageController extends BasicController{
 	 * @return
 	 */
 	@RequestMapping(value="/batchUpdate", method=RequestMethod.POST)
-	public Response update(@RequestBody List<I18nMessage> messages) {
+	public Response update(@RequestBody List<Map<String, Object>> messages) {
 		if(validate(messages) == DataValidationResult.SUCCESS) {
 			messageUpdateService.update(messages);
 		}
