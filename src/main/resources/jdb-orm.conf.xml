@@ -8,8 +8,4 @@
 			<mapping path="mappings" />
 		</mappings>
 	</environment>
-	
-	<properties placeholderPrefix="${" placeholderSuffix="}">
-		<resource path="jdbc.properties" />
-	</properties>
 </configuration>
