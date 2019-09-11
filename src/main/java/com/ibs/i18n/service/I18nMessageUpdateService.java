@@ -98,12 +98,13 @@ class CodeAndLanguageUniqueWhenUpdateValidator implements ServiceValidator<I18nM
 
 	@Override
 	public ValidationResult doValidate(I18nMessage i18nMessage, List<I18nMessage> originValidateDatas, Session session, String projectId, String customerId, String databaseId) {
-		Object[] objs = session.getSqlSession().uniqueQuery_("select id from I18N_MESSAGE_"+DynamicTableIndexContext.getIndex()+" where code=? and language=?", Collections.toList(i18nMessage.getCode(), i18nMessage.getLanguage()));
+		Object[] objs = session.getSqlSession().uniqueQuery_("select id, priority from I18N_MESSAGE_"+DynamicTableIndexContext.getIndex()+" where code=? and language=?", Collections.toList(i18nMessage.getCode(), i18nMessage.getLanguage()));
 		if(objs.length > 0) {
 			int id = Integer.parseInt(objs[0].toString());
 			if(id != i18nMessage.getId()) {
 				return new UniqueValidationResult("code,language", "["+i18nMessage.getCode()+", "+i18nMessage.getLanguage()+"]");
 			}
+			i18nMessage.setPriority(Byte.parseByte(objs[1].toString()));
 		}
 		return null;
 	}
