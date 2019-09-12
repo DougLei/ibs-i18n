@@ -26,8 +26,8 @@ ibs:
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:sqlserver://localhost:1433;DatabaseName=douglei
-    username: sa
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:ORCL
+    username: douglei
     password: root
-    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
     

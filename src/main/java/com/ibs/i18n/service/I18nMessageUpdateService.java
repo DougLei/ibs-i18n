@@ -91,7 +91,7 @@ class CodeAndLanguageUniqueWhenAddValidator implements ServiceValidator<Map<Stri
 	public ValidationResult doValidate(Map<String, Object> message, List<Map<String, Object>> originValidateDatas, Session session, String projectId, String customerId, String databaseId) {
 		byte originCount = Byte.parseByte(session.getSqlSession().uniqueQuery_("select count(id) from I18N_MESSAGE_"+DynamicTableIndexContext.getIndex()+" where code=? and language=?", Collections.toList(message.get("CODE"), message.get("LANGUAGE")))[0].toString());
 		if(originCount  > 0) {
-			return new UniqueValidationResult("code,language", "["+message.get("CODE")+", "+message.get("LANGUAGE")+"]");
+			return new UniqueValidationResult("code,language");
 		}
 		return null;
 	}
@@ -105,7 +105,7 @@ class CodeAndLanguageUniqueWhenUpdateValidator implements ServiceValidator<Map<S
 		if(objs.length > 0) {
 			int id = Integer.parseInt(objs[0].toString());
 			if(id != Integer.parseInt(message.get("ID").toString())) {
-				return new UniqueValidationResult("code,language", "["+message.get("CODE")+", "+message.get("LANGUAGE")+"]");
+				return new UniqueValidationResult("code,language");
 			}
 			message.put("PRIORITY", objs[1]);
 		}

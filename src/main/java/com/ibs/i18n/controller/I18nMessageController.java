@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ibs.i18n.service.I18nMessageQueryService;
 import com.ibs.i18n.service.I18nMessageUpdateService;
+import com.ibs.i18n.service.I18nUtilService;
 import com.ibs.parent.code.controller.BasicController;
 import com.ibs.parent.code.controller.validators.ParameterNotBlankValidator;
 import com.ibs.parent.code.validator.DataValidationResult;
@@ -34,6 +35,9 @@ public class I18nMessageController extends BasicController{
 	@Autowired
 	private I18nMessageUpdateService messageUpdateService;
 	
+	@Autowired
+	private I18nUtilService util;
+	
 	/**
 	 * 添加国际化消息
 	 * @param message
@@ -41,7 +45,7 @@ public class I18nMessageController extends BasicController{
 	 */
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public Response add(@RequestBody Map<String, Object> message) {
-		if(validate(message) == DataValidationResult.SUCCESS) {
+		if(validate(util.i18nMessageTableName(), message) == DataValidationResult.SUCCESS) {
 			messageUpdateService.insert(message);
 		}
 		return ResponseContext.getFinalResponse();
@@ -54,9 +58,9 @@ public class I18nMessageController extends BasicController{
 	 */
 	@RequestMapping(value="/batchAdd", method=RequestMethod.POST)
 	public Response add(@RequestBody List<Map<String, Object>> messages) {
-		if(validate(messages) == DataValidationResult.SUCCESS) {
+//		if(validate(util.i18nMessageTableName(), messages) == DataValidationResult.SUCCESS) {
 			messageUpdateService.insert(messages);
-		}
+//		}
 		return ResponseContext.getFinalBatchResponse();
 	}
 	
@@ -67,7 +71,7 @@ public class I18nMessageController extends BasicController{
 	 */
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public Response update(@RequestBody Map<String, Object> message) {
-		if(validate(message) == DataValidationResult.SUCCESS) {
+		if(validate(util.i18nMessageTableName(), message) == DataValidationResult.SUCCESS) {
 			messageUpdateService.update(message);
 		}
 		return ResponseContext.getFinalResponse();
@@ -80,7 +84,7 @@ public class I18nMessageController extends BasicController{
 	 */
 	@RequestMapping(value="/batchUpdate", method=RequestMethod.POST)
 	public Response update(@RequestBody List<Map<String, Object>> messages) {
-		if(validate(messages) == DataValidationResult.SUCCESS) {
+		if(validate(util.i18nMessageTableName(), messages) == DataValidationResult.SUCCESS) {
 			messageUpdateService.update(messages);
 		}
 		return ResponseContext.getFinalBatchResponse();
