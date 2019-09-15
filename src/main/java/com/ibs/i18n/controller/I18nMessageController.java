@@ -58,9 +58,9 @@ public class I18nMessageController extends BasicController{
 	 */
 	@RequestMapping(value="/batchAdd", method=RequestMethod.POST)
 	public Response add(@RequestBody List<Map<String, Object>> messages) {
-//		if(validate(util.i18nMessageTableName(), messages) == DataValidationResult.SUCCESS) {
+		if(validate(util.i18nMessageTableName(), messages) == DataValidationResult.SUCCESS) {
 			messageUpdateService.insert(messages);
-//		}
+		}
 		return ResponseContext.getFinalBatchResponse();
 	}
 	
