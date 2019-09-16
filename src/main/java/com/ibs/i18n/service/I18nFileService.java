@@ -1,6 +1,5 @@
 package com.ibs.i18n.service;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -81,7 +80,7 @@ public class I18nFileService extends FileService{
 	private void createI18nFile(String querySql, List<Object> parameters, StringBuilder content, FileBufferedWriter writer, String language) throws CreateSystemFileException {
 		PageResult<Map<String, Object>> result = SessionContext.getSqlSession().pageQuery(1, i18nConfig.getDownloadQueryCount(), querySql, parameters);
 		if(result.getCount() > 0) {
-			writer.setFile(i18nConfig.getDownloadFile(TokenContext.getToken().getProjectId(), language));
+			writer.setFile(i18nConfig.getFile(TokenContext.getToken().getProjectId(), language));
 			try {
 				writer.write(file_start);
 				while(true) {
@@ -109,7 +108,6 @@ public class I18nFileService extends FileService{
 	 * @throws DownloadFileException 
 	 */
 	public void downloadByLanguage(String language, HttpServletResponse response) throws DownloadFileException {
-		File file = i18nConfig.getDownloadFile(TokenContext.getToken().getProjectId(), language);
-		download(response, file);
+		download(response, i18nConfig.getDownloadFile(TokenContext.getToken().getProjectId(), language));
 	}
 }

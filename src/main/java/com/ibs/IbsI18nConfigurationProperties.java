@@ -5,6 +5,8 @@ import java.io.File;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import com.ibs.parent.code.service.file.DownloadFile;
+
 /**
  * 
  * @author DougLei
@@ -19,15 +21,16 @@ public class IbsI18nConfigurationProperties {
 	// 下载时查询数据的数量
 	private short downloadQueryCount = 200;
 	
-	/**
-	 * 获取要下载的文件
-	 * @param projectId
-	 * @param language
-	 * @return
-	 */
-	public File getDownloadFile(String projectId, String language) {
+	// 获取文件
+	public File getFile(String projectId, String language) {
 		return new File(downloadFilePath + File.separatorChar + projectId + File.separatorChar + language + ".json");
 	}
+	
+	// 获取要下载的文件对象
+	public DownloadFile getDownloadFile(String projectId, String language) {
+		return new DownloadFile(downloadFilePath + File.separatorChar + projectId + File.separatorChar + language + ".json");
+	}
+	
 	public String getDownloadFilePath() {
 		return downloadFilePath;
 	}
