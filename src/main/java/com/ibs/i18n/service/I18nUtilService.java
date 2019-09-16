@@ -5,14 +5,13 @@ import org.springframework.stereotype.Service;
 
 import com.ibs.dynamic.table.DynamicTableConfigurationProperties;
 import com.ibs.dynamic.table.DynamicTableIndexContext;
-import com.ibs.parent.code.service.file.SystemFileService;
 
 /**
  * 
  * @author DougLei
  */
 @Service
-public class I18nUtilService extends SystemFileService{
+public class I18nUtilService {
 	
 	@Autowired
 	private DynamicTableConfigurationProperties config;

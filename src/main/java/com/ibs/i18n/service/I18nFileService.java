@@ -20,7 +20,7 @@ import com.douglei.tools.utils.Collections;
 import com.ibs.IbsI18nConfigurationProperties;
 import com.ibs.parent.code.service.file.CreateSystemFileException;
 import com.ibs.parent.code.service.file.DownloadFileException;
-import com.ibs.parent.code.service.file.SystemFileService;
+import com.ibs.parent.code.service.file.FileService;
 import com.ibs.response.ResponseContext;
 import com.ibs.token.TokenContext;
 
@@ -29,7 +29,7 @@ import com.ibs.token.TokenContext;
  * @author DougLei
  */
 @TransactionComponent
-public class I18nFileService extends SystemFileService{
+public class I18nFileService extends FileService{
 	private static final String fileContentQuerySql = "select code, message from %s where language=?";
 	private static final char file_start = '{';
 	private static final String file_end = "\"\":\"\"}";
@@ -110,9 +110,6 @@ public class I18nFileService extends SystemFileService{
 	 */
 	public void downloadByLanguage(String language, HttpServletResponse response) throws DownloadFileException {
 		File file = i18nConfig.getDownloadFile(TokenContext.getToken().getProjectId(), language);
-		if(file.exists()) {
-			download(response, file);
-		}
-		throw new DownloadFileException(file);
+		download(response, file);
 	}
 }
