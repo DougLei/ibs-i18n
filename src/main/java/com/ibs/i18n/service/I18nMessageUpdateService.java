@@ -11,11 +11,11 @@ import com.douglei.orm.core.metadata.validator.ValidationResult;
 import com.douglei.orm.sessionfactory.data.validator.table.UniqueValidationResult;
 import com.douglei.orm.sessionfactory.sessions.Session;
 import com.douglei.tools.utils.Collections;
-import com.ibs.dynamic.table.DynamicTableIndexContext;
+import com.ibs.components.filters.dynamic.table.DynamicTableIndexContext;
+import com.ibs.components.filters.validator.DataValidationResult;
 import com.ibs.parent.code.entity.BasicProperty;
 import com.ibs.parent.code.service.BasicService;
 import com.ibs.parent.code.service.ServiceValidator;
-import com.ibs.parent.code.validator.DataValidationResult;
 
 /**
  * 

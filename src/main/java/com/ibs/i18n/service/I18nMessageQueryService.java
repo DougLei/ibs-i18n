@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.douglei.orm.context.SessionContext;
 import com.douglei.orm.context.transaction.component.Transaction;
 import com.douglei.orm.context.transaction.component.TransactionComponent;
-import com.ibs.response.ResponseContext;
+import com.ibs.components.response.ResponseContext;
 
 /**
  * 
