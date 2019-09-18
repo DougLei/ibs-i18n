@@ -1,5 +1,11 @@
 server:
-  port: 8082
+  port: 10002
+
+# 指定该服务要注册进指定url的服务注册中心
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10000/ibs-servers-eureka/
 
 ibs:
   parent:
