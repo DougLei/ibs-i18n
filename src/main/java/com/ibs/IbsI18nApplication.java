@@ -5,8 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.ibs.components.filters.dynamic.table.DynamicTableService;
-import com.ibs.components.filters.dynamic.table.DynamicTableSystemAlreadyStartException;
+import com.ibs.parent.code.service.dynamic.table.DynamicTableService;
+import com.ibs.parent.code.service.dynamic.table.DynamicTableSystemAlreadyStartException;
 
 /**
  * 
