@@ -36,6 +36,8 @@ spring:
     username: sa
     password: root
     driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  application:
+    name: ibs-i18n
     
 #    driverClassName: oracle.jdbc.driver.OracleDriver
 #    url: jdbc:oracle:thin:@localhost:1521:ORCL
