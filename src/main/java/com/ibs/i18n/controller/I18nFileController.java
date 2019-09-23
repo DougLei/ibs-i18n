@@ -17,15 +17,10 @@ import com.ibs.parent.code.controller.validators.ParameterNotBlankValidator;
 import com.ibs.parent.code.service.file.CreateSystemFileException;
 import com.ibs.parent.code.service.file.DownloadFileException;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
-
 /**
  * 
  * @author DougLei
  */
-@Api(value="国际化文件操作接口控制器")
 @RestController
 @RequestMapping("/i18n/file")
 public class I18nFileController extends BasicController{
@@ -40,8 +35,6 @@ public class I18nFileController extends BasicController{
 	 * @return
 	 * @throws CreateSystemFileException 
 	 */
-	@ApiOperation(value="创建国际化文件", notes="前端需要下载创建的文件, 渲染国际化页面")
-	@ApiImplicitParam(paramType="path", name="language", required=true, dataType="String")
 	@RequestMapping(value="create/{language}", method=RequestMethod.GET)
 	public Response createI18nFile(@PathVariable(name="language") String language) throws CreateSystemFileException {
 		if(validateByValidator(language, languageNotBlankValidator) == DataValidationResult.SUCCESS) {
