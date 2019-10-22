@@ -15,7 +15,7 @@ import com.douglei.api.doc.annotation.Api;
 import com.douglei.api.doc.annotation.ApiCatalog;
 import com.douglei.api.doc.annotation.ApiParam;
 import com.douglei.api.doc.annotation.ApiParam_;
-import com.douglei.api.doc.annotation.DataType;
+import com.douglei.api.doc.enums.DataType;
 import com.ibs.components.filters.validator.DataValidationResult;
 import com.ibs.components.response.Response;
 import com.ibs.components.response.ResponseContext;
@@ -51,12 +51,12 @@ public class I18nMessageController extends BasicController{
 	 */
 	@Api(value="添加国际化消息", 
 		 request=@ApiParam({
-			 @ApiParam_(value="CODE", required=true, description="国际化信息编码"),
-			 @ApiParam_(value="LANGUAGE", required=true, description="对应的语言", egValue="Zh_CN"),
-			 @ApiParam_(value="MESSAGE", required=true, description="国际化具体的消息"),
-			 @ApiParam_(value="PRIORITY", description="国际化信息的优先级, 越高越优先"),
-			 @ApiParam_(value="DateParam", dataType=DataType.DATE, formatPattern="yyyy-MM-dd", description="测试时间参数"),
-			 @ApiParam_(value = "EntityParam",  entity=I18nFileController.class, description="测试实例参数")
+			 @ApiParam_(name="CODE", required=true, description="国际化信息编码"),
+			 @ApiParam_(name="LANGUAGE", required=true, description="对应的语言", egValue="Zh_CN"),
+			 @ApiParam_(name="MESSAGE", required=true, description="国际化具体的消息"),
+			 @ApiParam_(name="PRIORITY", description="国际化信息的优先级, 越高越优先"),
+			 @ApiParam_(name="DateParam", dataType=DataType.DATE, description="测试时间参数"),
+			 @ApiParam_(name = "EntityParam",  entity=I18nFileController.class, description="测试实例参数")
 		 }))
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public Response add(@RequestBody Map<String, Object> message) {
