@@ -29,8 +29,8 @@ import com.ibs.parent.code.controller.validators.ParameterNotBlankValidator;
  * 
  * @author DougLei
  */
-@RestController
 @ApiCatalog(name="国际化消息api")
+@RestController
 @RequestMapping("/i18n/message")
 public class I18nMessageController extends BasicController{
 	private static final ParameterNotBlankValidator codesNotBlankValidator = new ParameterNotBlankValidator("codes");

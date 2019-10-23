@@ -53,11 +53,11 @@
 							<!-- 通用的请求头配置类 -->
 							<header>
 								<struct>object</struct>
-								<clz></clz>
+								<clz>com.ibs.components.request.header.RequestHeader</clz>
 							</header>
 							<response>
 								<struct>object</struct>
-								<clz></clz>
+								<clz>com.ibs.components.response.Response</clz>
 							</response>
 							
 							<scanPackages>
