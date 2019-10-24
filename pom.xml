@@ -35,7 +35,9 @@
 							<goal>apiDocBuilder</goal>
 						</goals>
 						<configuration>
+							<apiDocType>folder</apiDocType>
 							<name>国际化消息API</name>
+							<path>C:\Users\Administrator.USER-20190410XF\Desktop</path>
 							<version>1.0</version>
 							<authors>
 								<author>DougLei</author>
