@@ -49,7 +49,7 @@ public class I18nMessageController extends BasicController{
 	 * @param message
 	 * @return
 	 */
-	@Api(value="添加国际化消息", 
+	@Api(name="添加国际化消息",
 		 request=@ApiParam(params ={
 			 @ApiParam_(name="CODE", required=true, description="国际化信息编码", egValue="i18n.message.add.error"),
 			 @ApiParam_(name="LANGUAGE", required=true, description="对应的语言", egValue="Zh_CN"),
