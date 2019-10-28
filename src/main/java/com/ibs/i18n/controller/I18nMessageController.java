@@ -16,6 +16,7 @@ import com.douglei.api.doc.annotation.ApiCatalog;
 import com.douglei.api.doc.annotation.ApiParam;
 import com.douglei.api.doc.annotation.ApiParam_;
 import com.douglei.api.doc.types.DataType;
+import com.douglei.api.doc.types.ParamStructType;
 import com.ibs.components.filters.validator.DataValidationResult;
 import com.ibs.components.response.Response;
 import com.ibs.components.response.ResponseContext;
@@ -69,8 +70,15 @@ public class I18nMessageController extends BasicController{
 	 * @param messages
 	 * @return
 	 */
+	@Api(name="批量添加国际化消息",
+			 request=@ApiParam(struct=ParamStructType.ARRAY, params ={
+				 @ApiParam_(name="CODE", required=true, description="国际化信息编码", egValue="i18n.message.add.error"),
+				 @ApiParam_(name="LANGUAGE", required=true, description="对应的语言", egValue="Zh_CN"),
+				 @ApiParam_(name="MESSAGE", required=true, description="国际化具体的消息", egValue="添加国际化消息失败"),
+				 @ApiParam_(name="PRIORITY", dataType=DataType.INTEGER, defaultValue="0", description="国际化信息的优先级, 越高越优先, 由用户自定义", egValue="0")
+			 }))
 	@RequestMapping(value="/batchAdd", method=RequestMethod.POST)
-	public Response add(@RequestBody List<Map<String, Object>> messages) {
+	public Response batchAdd(@RequestBody List<Map<String, Object>> messages) {
 		if(validate(util.i18nMessageTableName(), messages) == DataValidationResult.SUCCESS) {
 			messageUpdateService.insert(messages);
 		}
@@ -96,7 +104,7 @@ public class I18nMessageController extends BasicController{
 	 * @return
 	 */
 	@RequestMapping(value="/batchUpdate", method=RequestMethod.POST)
-	public Response update(@RequestBody List<Map<String, Object>> messages) {
+	public Response batchUpdate(@RequestBody List<Map<String, Object>> messages) {
 		if(validate(util.i18nMessageTableName(), messages) == DataValidationResult.SUCCESS) {
 			messageUpdateService.update(messages);
 		}
