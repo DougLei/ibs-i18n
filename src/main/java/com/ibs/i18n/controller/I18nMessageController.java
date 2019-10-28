@@ -71,12 +71,12 @@ public class I18nMessageController extends BasicController{
 	 * @return
 	 */
 	@Api(name="批量添加国际化消息",
-			 request=@ApiParam(struct=ParamStructType.ARRAY, params ={
-				 @ApiParam_(name="CODE", required=true, description="国际化信息编码", egValue="i18n.message.add.error"),
-				 @ApiParam_(name="LANGUAGE", required=true, description="对应的语言", egValue="Zh_CN"),
-				 @ApiParam_(name="MESSAGE", required=true, description="国际化具体的消息", egValue="添加国际化消息失败"),
-				 @ApiParam_(name="PRIORITY", dataType=DataType.INTEGER, defaultValue="0", description="国际化信息的优先级, 越高越优先, 由用户自定义", egValue="0")
-			 }))
+		 request=@ApiParam(struct=ParamStructType.ARRAY, params ={
+			 @ApiParam_(name="CODE", required=true, description="国际化信息编码", egValue="i18n.message.add.error"),
+			 @ApiParam_(name="LANGUAGE", required=true, description="对应的语言", egValue="Zh_CN"),
+			 @ApiParam_(name="MESSAGE", required=true, description="国际化具体的消息", egValue="添加国际化消息失败"),
+			 @ApiParam_(name="PRIORITY", dataType=DataType.INTEGER, defaultValue="0", description="国际化信息的优先级, 越高越优先, 由用户自定义", egValue="0")
+		 }))
 	@RequestMapping(value="/batchAdd", method=RequestMethod.POST)
 	public Response batchAdd(@RequestBody List<Map<String, Object>> messages) {
 		if(validate(util.i18nMessageTableName(), messages) == DataValidationResult.SUCCESS) {
@@ -90,6 +90,13 @@ public class I18nMessageController extends BasicController{
 	 * @param message
 	 * @return
 	 */
+	@Api(name="修改国际化消息",
+		 request=@ApiParam(params ={
+			 @ApiParam_(name="CODE", required=true, description="国际化信息编码", egValue="i18n.message.add.error"),
+			 @ApiParam_(name="LANGUAGE", required=true, description="对应的语言", egValue="Zh_CN"),
+			 @ApiParam_(name="MESSAGE", required=true, description="国际化具体的消息", egValue="添加国际化消息失败"),
+			 @ApiParam_(name="PRIORITY", dataType=DataType.INTEGER, defaultValue="0", description="国际化信息的优先级, 越高越优先, 由用户自定义", egValue="0")
+		 }))
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public Response update(@RequestBody Map<String, Object> message) {
 		if(validate(util.i18nMessageTableName(), message) == DataValidationResult.SUCCESS) {
