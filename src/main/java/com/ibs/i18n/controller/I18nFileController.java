@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.douglei.api.doc.annotation.Api;
+import com.douglei.api.doc.annotation.ApiCatalog;
+import com.douglei.api.doc.annotation.ApiParam;
+import com.douglei.api.doc.annotation.ApiParam_;
+import com.douglei.api.doc.types.DataType;
 import com.ibs.components.filters.validator.DataValidationResult;
 import com.ibs.components.response.Response;
 import com.ibs.components.response.ResponseContext;
@@ -21,6 +26,7 @@ import com.ibs.parent.code.service.file.DownloadFileException;
  * 
  * @author DougLei
  */
+@ApiCatalog(name="国际化文件api")
 @RestController
 @RequestMapping("/i18n/file")
 public class I18nFileController extends BasicController{
@@ -35,6 +41,10 @@ public class I18nFileController extends BasicController{
 	 * @return
 	 * @throws CreateSystemFileException 
 	 */
+	@Api(name="创建国际化内容文件",
+			 url=@ApiParam(params ={
+				 @ApiParam_(name="language", required=true, description="创建指定language的文件, 或传入all, 创建所有language的文件", egValue="zh_CN"),
+			 }))
 	@RequestMapping(value="create/{language}", method=RequestMethod.GET)
 	public Response createI18nFile(@PathVariable(name="language") String language) throws CreateSystemFileException {
 		if(validateByValidator(language, languageNotBlankValidator) == DataValidationResult.SUCCESS) {
