@@ -12,7 +12,6 @@ import com.douglei.api.doc.annotation.Api;
 import com.douglei.api.doc.annotation.ApiCatalog;
 import com.douglei.api.doc.annotation.ApiParam;
 import com.douglei.api.doc.annotation.ApiParam_;
-import com.douglei.api.doc.types.DataType;
 import com.ibs.components.filters.validator.DataValidationResult;
 import com.ibs.components.response.Response;
 import com.ibs.components.response.ResponseContext;
