@@ -17,7 +17,7 @@ import com.douglei.orm.core.sql.pagequery.PageResult;
 import com.douglei.tools.instances.file.writer.FileBufferedWriter;
 import com.douglei.tools.utils.Collections;
 import com.ibs.IbsI18nConfigurationProperties;
-import com.ibs.components.filters.token.TokenContext;
+import com.ibs.components.filters.request.header.RequestHeaderContext;
 import com.ibs.components.response.ResponseContext;
 import com.ibs.parent.code.service.file.CreateSystemFileException;
 import com.ibs.parent.code.service.file.DownloadFileException;
@@ -61,7 +61,7 @@ public class I18nFileService extends FileService{
 			}
 		}
 		if(languages == null) {
-			ResponseContext.addValidation(null, null, "在项目["+TokenContext.getToken().getProjectId()+"]中, 不存在language为["+language+"]的国际化message数据", "ibs.i18n.non-existent.language", TokenContext.getToken().getProjectId(), language);
+			ResponseContext.addValidation(null, null, "在项目["+RequestHeaderContext.getTokenEntity().getProjectId()+"]中, 不存在language为["+language+"]的国际化message数据", "ibs.i18n.non-existent.language", RequestHeaderContext.getTokenEntity().getProjectId(), language);
 			return;
 		}
 		
@@ -80,7 +80,7 @@ public class I18nFileService extends FileService{
 	private void createI18nFile(String querySql, List<Object> parameters, StringBuilder content, FileBufferedWriter writer, String language) throws CreateSystemFileException {
 		PageResult<Map<String, Object>> result = SessionContext.getSqlSession().pageQuery(1, i18nConfig.getDownloadQueryCount(), querySql, parameters);
 		if(result.getCount() > 0) {
-			writer.setFile(i18nConfig.getFile(TokenContext.getToken().getProjectId(), language));
+			writer.setFile(i18nConfig.getFile(RequestHeaderContext.getTokenEntity().getProjectId(), language));
 			try {
 				writer.write(file_start);
 				while(true) {
@@ -108,6 +108,6 @@ public class I18nFileService extends FileService{
 	 * @throws DownloadFileException 
 	 */
 	public void downloadByLanguage(String language, HttpServletResponse response) throws DownloadFileException {
-		download(response, i18nConfig.getDownloadFile(TokenContext.getToken().getProjectId(), language));
+		download(response, i18nConfig.getDownloadFile(RequestHeaderContext.getTokenEntity().getProjectId(), language));
 	}
 }
