@@ -36,7 +36,8 @@
 						</goals>
 						<configuration>
 							<apiDocType>folder</apiDocType>
-							<name>国际化消息API</name>
+							<fileName>i18n-api</fileName>
+							<title>国际化消息API</title>
 							<version>1.0</version>
 							<path>C:\Users\Administrator.USER-20190410XF\Desktop</path>
 							<authors>
