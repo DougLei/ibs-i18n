@@ -15,7 +15,7 @@ import com.douglei.orm.context.transaction.component.Transaction;
 import com.douglei.orm.context.transaction.component.TransactionComponent;
 import com.douglei.orm.core.sql.pagequery.PageResult;
 import com.douglei.tools.instances.file.writer.FileBufferedWriter;
-import com.douglei.tools.utils.Collections;
+import com.douglei.tools.utils.CollectionUtil;
 import com.ibs.IbsI18nConfigurationProperties;
 import com.ibs.components.filters.request.header.RequestHeaderContext;
 import com.ibs.components.response.ResponseContext;
@@ -56,7 +56,7 @@ public class I18nFileService extends FileService{
 				}
 			}
 		}else {
-			if(SessionContext.getSqlSession().uniqueQuery_("select distinct language from " + util.i18nMessageTableName() + " where language=?", Collections.toList(language)).length == 1) {
+			if(SessionContext.getSqlSession().uniqueQuery_("select distinct language from " + util.i18nMessageTableName() + " where language=?", CollectionUtil.toList(language)).length == 1) {
 				languages = new String[] {language};
 			}
 		}
