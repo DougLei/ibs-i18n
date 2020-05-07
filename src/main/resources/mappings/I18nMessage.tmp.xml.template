@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mapping-configuration>
-	<table name="I18N_MESSAGE_%d" createMode="create">
+	<table name="I18N_MESSAGE_%d" forceCreateMode="create">
 		<columns>
 			<column name="id" dataType="integer" primaryKey="true" length="20" validate="true"/>
 			

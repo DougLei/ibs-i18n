@@ -5,7 +5,6 @@ server:
 eureka:
   client:
     service-url:
-#      defaultZone: http://localhost:20000/eureka/
       defaultZone: http://192.168.1.111:20000/eureka/
 
 ibs:
@@ -18,17 +17,11 @@ ibs:
       enable-dynamic-table-filter: true
     dynamic:
       table:
-        project-name: i18n
-        mapping-template-resource-paths:
+        project-name: i18n # 固定写法, 不允许修改
+        mapping-template-resource-paths:  # 固定写法, 不允许修改
         - mappings/I18nMessage.tmp.xml.template
-        mapping-codes:
-        - I18N_MESSAGE_
-        name: I18N_DYNAMIC_TABLE
         count-ceiling: 500
-        warn-count-ceiling: 450
-        skip-set-table-index-url-patterns:
-        - /i18n/dynamic/table/initial
-        - /i18n/dynamic/table/destroy
+        warn-count-ceiling: 475
 
 spring:
   datasource:
@@ -38,10 +31,4 @@ spring:
     password: root
     driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
   application:
-    name: ibs-i18n
-    
-#    driverClassName: oracle.jdbc.driver.OracleDriver
-#    url: jdbc:oracle:thin:@localhost:1521:ORCL
-#    username: douglei
-#    password: root
-    
+    name: ibs-i18n    
