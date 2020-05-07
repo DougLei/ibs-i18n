@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 
 import com.ibs.i18n.I18nUtil;
 import com.ibs.parent.code.service.dynamic.table.DynamicTableService;
-import com.ibs.parent.code.service.dynamic.table.DynamicTableSystemAlreadyStartException;
 
 /**
  * 
@@ -25,7 +24,7 @@ public class IbsI18nApplication {
 	private I18nUtil util;
 	
 	@Bean
-	public void start() throws DynamicTableSystemAlreadyStartException {
+	public void start() {
 		service.start(util.getMappingTemplates());
 	}
 	
