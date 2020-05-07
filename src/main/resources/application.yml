@@ -33,7 +33,7 @@ ibs:
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:sqlserver://localhost:1433;DatabaseName=douglei
+    url: jdbc:sqlserver://localhost:1433;DatabaseName=i18n
     username: sa
     password: root
     driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
