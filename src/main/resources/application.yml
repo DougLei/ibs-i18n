@@ -15,10 +15,6 @@ ibs:
       access-control-max-age: 1800
     filter:
       enable-dynamic-table-filter: true
-    dynamic:
-      table:
-        project-name: i18n # 固定写法, 不允许修改
-        count-ceiling: 500
 
 spring:
   datasource:
