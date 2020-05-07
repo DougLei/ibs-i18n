@@ -20,9 +20,9 @@ import com.douglei.api.doc.types.ParamStructType;
 import com.ibs.components.filters.validator.DataValidationResult;
 import com.ibs.components.response.Response;
 import com.ibs.components.response.ResponseContext;
+import com.ibs.i18n.I18nUtil;
 import com.ibs.i18n.service.I18nMessageQueryService;
 import com.ibs.i18n.service.I18nMessageUpdateService;
-import com.ibs.i18n.service.I18nUtilService;
 import com.ibs.parent.code.controller.BasicController;
 import com.ibs.parent.code.controller.validators.ParameterNotBlankValidator;
 
@@ -43,7 +43,7 @@ public class I18nMessageController extends BasicController{
 	private I18nMessageUpdateService messageUpdateService;
 	
 	@Autowired
-	private I18nUtilService util;
+	private I18nUtil util;
 	
 	/**
 	 * 添加国际化消息

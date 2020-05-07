@@ -9,6 +9,7 @@ import com.douglei.orm.context.SessionContext;
 import com.douglei.orm.context.transaction.component.Transaction;
 import com.douglei.orm.context.transaction.component.TransactionComponent;
 import com.ibs.components.response.ResponseContext;
+import com.ibs.i18n.I18nUtil;
 
 /**
  * 
@@ -18,7 +19,7 @@ import com.ibs.components.response.ResponseContext;
 public class I18nMessageQueryService {
 	
 	@Autowired
-	private I18nUtilService util;
+	private I18nUtil util;
 	
 	/**
 	 * 

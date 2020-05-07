@@ -19,6 +19,7 @@ import com.douglei.tools.utils.CollectionUtil;
 import com.ibs.IbsI18nConfigurationProperties;
 import com.ibs.components.filters.request.header.RequestHeaderContext;
 import com.ibs.components.response.ResponseContext;
+import com.ibs.i18n.I18nUtil;
 import com.ibs.parent.code.service.file.CreateSystemFileException;
 import com.ibs.parent.code.service.file.DownloadFileException;
 import com.ibs.parent.code.service.file.FileService;
@@ -34,7 +35,7 @@ public class I18nFileService extends FileService{
 	private static final String file_end = "\"\":\"\"}";
 	
 	@Autowired
-	private I18nUtilService util;
+	private I18nUtil util;
 	
 	@Autowired
 	private IbsI18nConfigurationProperties i18nConfig;

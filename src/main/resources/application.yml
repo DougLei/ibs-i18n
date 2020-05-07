@@ -18,10 +18,7 @@ ibs:
     dynamic:
       table:
         project-name: i18n # 固定写法, 不允许修改
-        mapping-template-resource-paths:  # 固定写法, 不允许修改
-        - mappings/I18nMessage.tmp.xml.template
         count-ceiling: 500
-        warn-count-ceiling: 475
 
 spring:
   datasource:

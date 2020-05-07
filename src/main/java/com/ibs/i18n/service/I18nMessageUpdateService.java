@@ -13,6 +13,7 @@ import com.douglei.orm.sessionfactory.sessions.Session;
 import com.douglei.tools.utils.CollectionUtil;
 import com.ibs.components.filters.dynamic.table.DynamicTableIndexContext;
 import com.ibs.components.filters.validator.DataValidationResult;
+import com.ibs.i18n.I18nUtil;
 import com.ibs.parent.code.entity.BasicProperty;
 import com.ibs.parent.code.service.BasicService;
 import com.ibs.parent.code.service.ServiceValidator;
@@ -29,7 +30,7 @@ public class I18nMessageUpdateService extends BasicService{
 	private static final CodeAndLanguageUniqueWhenUpdateValidator codeAndLanguageUniqueWhenUpdateValidator = new CodeAndLanguageUniqueWhenUpdateValidator();
 	
 	@Autowired
-	private I18nUtilService util;
+	private I18nUtil util;
 	
 	/**
 	 * 
