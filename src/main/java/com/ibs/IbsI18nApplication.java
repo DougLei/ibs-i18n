@@ -29,7 +29,7 @@ public class IbsI18nApplication {
 	
 	@Bean
 	public void start() {
-		dynamicTableConfig.setProjectInfo("i18n");
+		dynamicTableConfig.setProjectInfo("I18N");
 		service.start(util.getMappingTemplates());
 	}
 	
