@@ -23,6 +23,5 @@ spring:
     url: jdbc:sqlserver://localhost:1433;DatabaseName=i18n
     username: sa
     password: root
-    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
   application:
     name: ibs-i18n    
