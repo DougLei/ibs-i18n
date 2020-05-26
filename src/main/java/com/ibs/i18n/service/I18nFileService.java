@@ -32,7 +32,7 @@ import com.ibs.parent.code.service.file.FileService;
 public class I18nFileService extends FileService{
 	private static final String fileContentQuerySql = "select code, message from %s where language=?";
 	private static final char file_start = '{';
-	private static final String file_end = "\"\":\"\"}";
+	private static final String file_end = "\"EOF\":\"-1\"}";
 	
 	@Autowired
 	private I18nUtil util;
