@@ -16,7 +16,7 @@ import com.ibs.parent.code.service.file.DownloadFile;
 public class IbsI18nConfigurationProperties {
 	
 	// 要下载文件的路径, 使用绝对路径
-	private String downloadFilePath = System.getProperty("user.home") + File.separatorChar + "i18n-files" + File.separatorChar;
+	private String downloadFilePath = System.getProperty("user.home") + File.separatorChar + ".i18n" + File.separatorChar;
 	
 	// 下载时查询数据的数量
 	private short downloadQueryCount = 200;
@@ -35,7 +35,7 @@ public class IbsI18nConfigurationProperties {
 		return downloadFilePath;
 	}
 	public void setDownloadFilePath(String downloadFilePath) {
-		this.downloadFilePath = downloadFilePath + File.separatorChar + "i18n-files" + File.separatorChar;
+		this.downloadFilePath = downloadFilePath + File.separatorChar + ".i18n" + File.separatorChar;
 	}
 	public short getDownloadQueryCount() {
 		return downloadQueryCount;
