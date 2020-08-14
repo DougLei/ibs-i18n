@@ -62,7 +62,8 @@ public class I18nFileService extends FileService{
 			}
 		}
 		if(languages == null) {
-			ResponseContext.addValidation(null, null, "在项目["+RequestHeaderContext.getTokenEntity().getProjectId()+"]中, 不存在language为["+language+"]的国际化message数据", "ibs.i18n.non-existent.language", RequestHeaderContext.getTokenEntity().getProjectId(), language);
+			// TODO 这块的提示信息 projectId, 后续换成project name
+			ResponseContext.addValidation("在项目[%s]中, 不存在language为[%s]的国际化数据", "ibs.i18n.unexists.language", RequestHeaderContext.getTokenEntity().getProjectId(), language);
 			return;
 		}
 		
