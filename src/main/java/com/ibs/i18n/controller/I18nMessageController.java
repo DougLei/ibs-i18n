@@ -34,7 +34,7 @@ import com.ibs.parent.code.controller.validators.ParameterNotBlankValidator;
 @RestController
 @RequestMapping("/i18n/message")
 public class I18nMessageController extends BasicController{
-	private static final ParameterNotBlankValidator codesNotBlankValidator = new ParameterNotBlankValidator("codes");
+	private ParameterNotBlankValidator codesNotBlankValidator = new ParameterNotBlankValidator("codes");
 	
 	@Autowired
 	private I18nMessageQueryService messageQueryService;

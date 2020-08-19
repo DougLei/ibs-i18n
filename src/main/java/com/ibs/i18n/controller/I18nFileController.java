@@ -29,7 +29,7 @@ import com.ibs.parent.code.service.file.DownloadFileException;
 @RestController
 @RequestMapping("/i18n/file")
 public class I18nFileController extends BasicController{
-	private static final ParameterNotBlankValidator languageNotBlankValidator = new ParameterNotBlankValidator("language");
+	private ParameterNotBlankValidator languageNotBlankValidator = new ParameterNotBlankValidator("language");
 	
 	@Autowired
 	private I18nFileService service;
