@@ -17,7 +17,7 @@ public class I18nUtil extends DynamicTableUtil{
 	 * @return
 	 */
 	public String i18nMessageTableName() {
-		return getMappingCodes()[0] + DynamicTableIndexContext.getIndex();
+		return getMappingCodes()[0] + DynamicTableIndexContext.getCurrentTableIndex();
 	}
 	
 

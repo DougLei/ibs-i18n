@@ -31,7 +31,9 @@ public class I18nDynamicTableController extends BasicController{
 	 */
 	@RequestMapping(value="/initial", method=RequestMethod.GET)
 	public Response initial() {
-		service.initial(util.getMappingCodes(), util.getMappingTemplates());
+		try {
+			service.initial(util.getMappingTemplates());
+		} catch (Exception e) {}
 		return ResponseContext.getFinalResponse();
 	}
 	
@@ -41,7 +43,9 @@ public class I18nDynamicTableController extends BasicController{
 	 */
 	@RequestMapping(value="/destroy", method=RequestMethod.GET)
 	public Response destroy() {
-		service.destroy(util.getMappingCodes(), util.getMappingTemplates());
+		try {
+			service.destroy(util.getMappingCodes());
+		} catch (Exception e) {}
 		return ResponseContext.getFinalResponse();
 	}
 }

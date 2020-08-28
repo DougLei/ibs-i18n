@@ -90,7 +90,7 @@ public class I18nMessageUpdateService extends BasicService{
 class CodeAndLanguageUniqueWhenAddValidator implements ServiceValidator<Map<String, Object>> {
 	@Override
 	public ValidationResult doValidate(short index, Map<String, Object> message, Session session, String projectId, String customerId, String databaseId) {
-		byte originCount = Byte.parseByte(session.getSqlSession().uniqueQuery_("select count(id) from I18N_MESSAGE_"+DynamicTableIndexContext.getIndex()+" where code=? and language=?", CollectionUtil.toList(message.get("CODE"), message.get("LANGUAGE")))[0].toString());
+		byte originCount = Byte.parseByte(session.getSqlSession().uniqueQuery_("select count(id) from I18N_MESSAGE_"+DynamicTableIndexContext.getCurrentTableIndex()+" where code=? and language=?", CollectionUtil.toList(message.get("CODE"), message.get("LANGUAGE")))[0].toString());
 		if(originCount  > 0) {
 			return new UniqueValidationResult("CODE,LANGUAGE");
 		}
@@ -102,7 +102,7 @@ class CodeAndLanguageUniqueWhenAddValidator implements ServiceValidator<Map<Stri
 class CodeAndLanguageUniqueWhenUpdateValidator implements ServiceValidator<Map<String, Object>> {
 	@Override
 	public ValidationResult doValidate(short index, Map<String, Object> message, Session session, String projectId, String customerId, String databaseId) {
-		Object[] objs = session.getSqlSession().uniqueQuery_("select id, priority from I18N_MESSAGE_"+DynamicTableIndexContext.getIndex()+" where code=? and language=?", CollectionUtil.toList(message.get("CODE"), message.get("LANGUAGE")));
+		Object[] objs = session.getSqlSession().uniqueQuery_("select id, priority from I18N_MESSAGE_"+DynamicTableIndexContext.getCurrentTableIndex()+" where code=? and language=?", CollectionUtil.toList(message.get("CODE"), message.get("LANGUAGE")));
 		if(objs.length > 0) {
 			int id = Integer.parseInt(objs[0].toString());
 			if(id != Integer.parseInt(message.get("ID").toString())) {
