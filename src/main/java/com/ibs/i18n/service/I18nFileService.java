@@ -72,17 +72,19 @@ public class I18nFileService extends FileService{
 		StringBuilder content = new StringBuilder(1024);
 		FileBufferedWriter writer = new FileBufferedWriter();
 		for (String language_ : languages) {
-			if(parameters.size() > 0) parameters.clear(); parameters.add(language_);
-			createI18nFile(querySql, parameters, content, writer, language_);
+			if(!parameters.isEmpty()) 
+				parameters.clear(); 
+			parameters.add(language_);
+			createI18nFile(querySql, parameters, content, writer);
 		}
 		addSingleResponseData("language", Arrays.toString(languages));
 	}
 	
 	// 创建i18n文件
-	private void createI18nFile(String querySql, List<Object> parameters, StringBuilder content, FileBufferedWriter writer, String language) throws CreateSystemFileException {
+	private void createI18nFile(String querySql, List<Object> parameters, StringBuilder content, FileBufferedWriter writer) throws CreateSystemFileException {
 		PageResult<Map<String, Object>> result = SessionContext.getSqlSession().pageQuery(1, i18nConfig.getDownloadQueryCount(), querySql, parameters);
 		if(result.getCount() > 0) {
-			writer.setFile(i18nConfig.getFile(RequestHeaderContext.getTokenEntity().getProjectId(), language));
+			writer.setTargetFile(i18nConfig.getFile(RequestHeaderContext.getTokenEntity().getProjectId(), parameters.get(0).toString()));
 			try {
 				writer.write(file_start);
 				while(true) {
