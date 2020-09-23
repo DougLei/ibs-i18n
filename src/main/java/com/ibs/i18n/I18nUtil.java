@@ -2,8 +2,8 @@ package com.ibs.i18n;
 
 import org.springframework.stereotype.Component;
 
+import com.ibs.code.service.dynamic.table.DynamicTableUtil;
 import com.ibs.components.filters.dynamic.table.DynamicTableIndexContext;
-import com.ibs.parent.code.service.dynamic.table.DynamicTableUtil;
 
 /**
  * 

@@ -17,14 +17,14 @@ import com.douglei.api.doc.annotation.ApiParam;
 import com.douglei.api.doc.annotation.ApiParam_;
 import com.douglei.api.doc.types.DataType;
 import com.douglei.api.doc.types.ParamStructType;
+import com.ibs.code.controller.BasicController;
+import com.ibs.code.controller.validators.ParameterNotBlankValidator;
 import com.ibs.components.filters.validator.DataValidationResult;
 import com.ibs.components.response.Response;
 import com.ibs.components.response.ResponseContext;
 import com.ibs.i18n.I18nUtil;
 import com.ibs.i18n.service.I18nMessageQueryService;
 import com.ibs.i18n.service.I18nMessageUpdateService;
-import com.ibs.parent.code.controller.BasicController;
-import com.ibs.parent.code.controller.validators.ParameterNotBlankValidator;
 
 /**
  * 

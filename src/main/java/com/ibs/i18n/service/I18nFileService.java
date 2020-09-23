@@ -17,12 +17,12 @@ import com.douglei.orm.core.sql.pagequery.PageResult;
 import com.douglei.tools.instances.file.writer.FileBufferedWriter;
 import com.douglei.tools.utils.CollectionUtil;
 import com.ibs.IbsI18nConfigurationProperties;
+import com.ibs.code.service.file.CreateFileException;
+import com.ibs.code.service.file.DownloadFileException;
+import com.ibs.code.service.file.FileService;
 import com.ibs.components.filters.request.header.RequestHeaderContext;
 import com.ibs.components.response.ResponseContext;
 import com.ibs.i18n.I18nUtil;
-import com.ibs.parent.code.service.file.CreateSystemFileException;
-import com.ibs.parent.code.service.file.DownloadFileException;
-import com.ibs.parent.code.service.file.FileService;
 
 /**
  * 
@@ -43,10 +43,10 @@ public class I18nFileService extends FileService{
 	/**
 	 * 
 	 * @param language
-	 * @throws CreateSystemFileException 
+	 * @throws CreateFileException 
 	 */
 	@Transaction(beginTransaction=false)
-	public void createI18nFile(String language) throws CreateSystemFileException {
+	public void createI18nFile(String language) throws CreateFileException {
 		String[] languages = null;
 		if(language.equalsIgnoreCase("all")) {
 			List<Object[]> tmpLanguages = SessionContext.getSqlSession().query_("select distinct language from " + util.i18nMessageTableName());
@@ -81,7 +81,7 @@ public class I18nFileService extends FileService{
 	}
 	
 	// 创建i18n文件
-	private void createI18nFile(String querySql, List<Object> parameters, StringBuilder content, FileBufferedWriter writer) throws CreateSystemFileException {
+	private void createI18nFile(String querySql, List<Object> parameters, StringBuilder content, FileBufferedWriter writer) throws CreateFileException {
 		PageResult<Map<String, Object>> result = SessionContext.getSqlSession().pageQuery(1, i18nConfig.getDownloadQueryCount(), querySql, parameters);
 		if(result.getCount() > 0) {
 			writer.setTargetFile(i18nConfig.getFile(RequestHeaderContext.getTokenEntity().getProjectId(), parameters.get(0).toString()));
@@ -98,7 +98,7 @@ public class I18nFileService extends FileService{
 				}
 				writer.write(file_end);
 			} catch (IOException e) {
-				throw new CreateSystemFileException(writer.getTargetFile(), e);
+				throw new CreateFileException(writer.getTargetFile(), e);
 			} finally {
 				writer.close();
 			}

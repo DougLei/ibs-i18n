@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ibs.code.controller.BasicController;
+import com.ibs.code.service.dynamic.table.DynamicTableService;
 import com.ibs.components.response.Response;
 import com.ibs.components.response.ResponseContext;
 import com.ibs.i18n.I18nUtil;
-import com.ibs.parent.code.controller.BasicController;
-import com.ibs.parent.code.service.dynamic.table.DynamicTableService;
 
 /**
  * 

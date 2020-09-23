@@ -12,14 +12,14 @@ import com.douglei.api.doc.annotation.Api;
 import com.douglei.api.doc.annotation.ApiCatalog;
 import com.douglei.api.doc.annotation.ApiParam;
 import com.douglei.api.doc.annotation.ApiParam_;
+import com.ibs.code.controller.BasicController;
+import com.ibs.code.controller.validators.ParameterNotBlankValidator;
+import com.ibs.code.service.file.CreateFileException;
+import com.ibs.code.service.file.DownloadFileException;
 import com.ibs.components.filters.validator.DataValidationResult;
 import com.ibs.components.response.Response;
 import com.ibs.components.response.ResponseContext;
 import com.ibs.i18n.service.I18nFileService;
-import com.ibs.parent.code.controller.BasicController;
-import com.ibs.parent.code.controller.validators.ParameterNotBlankValidator;
-import com.ibs.parent.code.service.file.CreateSystemFileException;
-import com.ibs.parent.code.service.file.DownloadFileException;
 
 /**
  * 
@@ -38,14 +38,14 @@ public class I18nFileController extends BasicController{
 	 * 创建国际化内容文件
 	 * @param language 创建指定language的文件, 或传入all, 创建所有language的文件
 	 * @return
-	 * @throws CreateSystemFileException 
+	 * @throws CreateFileException 
 	 */
 	@Api(name="创建国际化内容文件",
 			 url=@ApiParam(params ={
 				 @ApiParam_(name="language", required=true, description="创建指定language的文件, 或传入all, 创建所有language的文件", egValue="zh_CN"),
 			 }))
 	@RequestMapping(value="create/{language}", method=RequestMethod.GET)
-	public Response createI18nFile(@PathVariable(name="language") String language) throws CreateSystemFileException {
+	public Response createI18nFile(@PathVariable(name="language") String language) throws CreateFileException {
 		if(validateByValidator(language, languageNotBlankValidator) == DataValidationResult.SUCCESS) {
 			service.createI18nFile(language);
 		}

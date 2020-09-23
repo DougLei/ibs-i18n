@@ -5,7 +5,7 @@ import java.io.File;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import com.ibs.parent.code.service.file.DownloadFile;
+import com.ibs.code.service.file.DownloadFile;
 
 /**
  * 
