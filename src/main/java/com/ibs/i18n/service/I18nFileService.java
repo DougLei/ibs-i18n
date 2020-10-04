@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.douglei.orm.context.SessionContext;
 import com.douglei.orm.context.transaction.component.Transaction;
 import com.douglei.orm.context.transaction.component.TransactionComponent;
-import com.douglei.orm.core.sql.pagequery.PageResult;
+import com.douglei.orm.sql.pagequery.PageResult;
 import com.douglei.tools.instances.file.writer.FileBufferedWriter;
 import com.ibs.IbsI18nConfigurationProperties;
 import com.ibs.code.service.file.CreateFileException;
