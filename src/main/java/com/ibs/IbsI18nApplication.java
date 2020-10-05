@@ -7,7 +7,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 
 import com.douglei.orm.mapping.execute.MappingExecuteException;
-import com.douglei.orm.mapping.execute.ParseMappingException;
+import com.douglei.orm.mapping.execute.entity.ParseMappingException;
 import com.ibs.code.service.dynamic.table.DynamicTableService;
 import com.ibs.i18n.I18nUtil;
 
