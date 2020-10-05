@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 
-import com.douglei.orm.mapping.execute.MappingExecuteException;
-import com.douglei.orm.mapping.execute.entity.ParseMappingException;
+import com.douglei.orm.mapping.handler.MappingHandlerException;
+import com.douglei.orm.mapping.handler.entity.ParseMappingException;
 import com.ibs.code.service.dynamic.table.DynamicTableService;
 import com.ibs.i18n.I18nUtil;
 
@@ -26,7 +26,7 @@ public class IbsI18nApplication {
 	private I18nUtil util;
 	
 	@Bean
-	public void start() throws ParseMappingException, MappingExecuteException {
+	public void start() throws ParseMappingException, MappingHandlerException {
 		service.start("I18N", util.getMappingTemplates());
 	}
 	
