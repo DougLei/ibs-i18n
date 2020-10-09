@@ -2,18 +2,18 @@
 <mapping-configuration>
 	<table name="I18N_MESSAGE_%d" createMode="create" strict="true">
 		<columns>
-			<column name="ID" dataType="integer" primaryKey="true" length="20" validate="true"/>
+			<column name="ID" dataType="number" primaryKey="true" length="10" validate="true"/>
 			
 			<column name="CODE" dataType="string" length="150" nullable="false" validate="true"/>
 			<column name="LANGUAGE" dataType="string" length="5" nullable="false" validate="true"/>
 			<column name="MESSAGE" dataType="nstring" length="200" nullable="false" validate="true"/>
-			<column name="PRIORITY" dataType="byte" length="3" defaultValue="0" validate="true"/>
+			<column name="PRIORITY" dataType="number" length="3" defaultValue="0" validate="true"/>
 			
 			<column name="CREATE_USER_ID" dataType="string" length="36" nullable="false"/>
-			<column name="CREATE_DATE" dataType="date" nullable="false"/>
+			<column name="CREATE_DATE" dataType="datetime" nullable="false"/>
 			
 			<column name="LAST_UPDATE_USER_ID" dataType="string" length="36" nullable="false"/>
-			<column name="LAST_UPDATE_DATE" dataType="date" nullable="false"/>
+			<column name="LAST_UPDATE_DATE" dataType="datetime" nullable="false"/>
 		</columns>
 		
 		<constraints>
