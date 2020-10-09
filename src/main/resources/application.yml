@@ -1,6 +1,5 @@
 server:
-  max-http-header-size: 10000
-  port: 10002
+  port: 8103
 
 # 指定该服务要注册进指定url的服务注册中心
 eureka:
@@ -20,8 +19,9 @@ ibs:
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:sqlserver://localhost:1433;DatabaseName=i18n
+    url: jdbc:sqlserver://192.168.1.111:1433;DatabaseName=SmartOne2_I18N
     username: sa
-    password: root
+    password: 123_abc
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
   application:
-    name: ibs-i18n    
+    name: ibs-i18n
