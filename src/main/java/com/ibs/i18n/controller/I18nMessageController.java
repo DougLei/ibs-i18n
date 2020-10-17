@@ -59,7 +59,7 @@ public class I18nMessageController extends BasicController{
 		 }))
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public Response add(@RequestBody Map<String, Object> message) {
-		if(validate(util.i18nMessageTableName(), message) == DataValidationResult.SUCCESS) {
+		if(validate4Table(util.i18nMessageTableName(), message) == DataValidationResult.SUCCESS) {
 			messageUpdateService.insert(message);
 		}
 		return ResponseContext.getFinalResponse();
@@ -79,7 +79,7 @@ public class I18nMessageController extends BasicController{
 		 }))
 	@RequestMapping(value="/batchAdd", method=RequestMethod.POST)
 	public Response batchAdd(@RequestBody List<Map<String, Object>> messages) {
-		if(validate(util.i18nMessageTableName(), messages) == DataValidationResult.SUCCESS) {
+		if(validate4Table(util.i18nMessageTableName(), messages) == DataValidationResult.SUCCESS) {
 			messageUpdateService.insert(messages);
 		}
 		return ResponseContext.getFinalBatchResponse();
@@ -99,7 +99,7 @@ public class I18nMessageController extends BasicController{
 		 }))
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public Response update(@RequestBody Map<String, Object> message) {
-		if(validate(util.i18nMessageTableName(), message) == DataValidationResult.SUCCESS) {
+		if(validate4Table(util.i18nMessageTableName(), message) == DataValidationResult.SUCCESS) {
 			messageUpdateService.update(message);
 		}
 		return ResponseContext.getFinalResponse();
@@ -112,7 +112,7 @@ public class I18nMessageController extends BasicController{
 	 */
 	@RequestMapping(value="/batchUpdate", method=RequestMethod.POST)
 	public Response batchUpdate(@RequestBody List<Map<String, Object>> messages) {
-		if(validate(util.i18nMessageTableName(), messages) == DataValidationResult.SUCCESS) {
+		if(validate4Table(util.i18nMessageTableName(), messages) == DataValidationResult.SUCCESS) {
 			messageUpdateService.update(messages);
 		}
 		return ResponseContext.getFinalBatchResponse();
