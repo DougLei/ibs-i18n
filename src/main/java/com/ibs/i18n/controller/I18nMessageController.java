@@ -82,7 +82,7 @@ public class I18nMessageController extends BasicController{
 		if(validate4Table(util.i18nMessageTableName(), messages) == DataValidationResult.SUCCESS) {
 			messageUpdateService.insert(messages);
 		}
-		return ResponseContext.getFinalBatchResponse();
+		return ResponseContext.getFinalResponse(true);
 	}
 	
 	/**
@@ -115,7 +115,7 @@ public class I18nMessageController extends BasicController{
 		if(validate4Table(util.i18nMessageTableName(), messages) == DataValidationResult.SUCCESS) {
 			messageUpdateService.update(messages);
 		}
-		return ResponseContext.getFinalBatchResponse();
+		return ResponseContext.getFinalResponse(true);
 	}
 
 	/**
@@ -142,6 +142,6 @@ public class I18nMessageController extends BasicController{
 		if(validateByValidator(codes, codesNotBlankValidator) == DataValidationResult.SUCCESS) {
 			messageQueryService.queryByCodes(codes.split(","));
 		}
-		return ResponseContext.getFinalBatchResponse();
+		return ResponseContext.getFinalResponse(true);
 	}
 }
