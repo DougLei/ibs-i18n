@@ -22,7 +22,6 @@ import com.ibs.code.controller.validators.ParameterNotBlankValidator;
 import com.ibs.code.result.DataValidationResult;
 import com.ibs.components.response.Response;
 import com.ibs.components.response.ResponseContext;
-import com.ibs.i18n.I18nUtil;
 import com.ibs.i18n.service.I18nMessageQueryService;
 import com.ibs.i18n.service.I18nMessageUpdateService;
 
@@ -42,8 +41,8 @@ public class I18nMessageController extends BasicController{
 	@Autowired
 	private I18nMessageUpdateService messageUpdateService;
 	
-	@Autowired
-	private I18nUtil util;
+//	@Autowired
+//	private I18nUtil util;
 	
 	/**
 	 * 添加国际化消息
@@ -59,9 +58,9 @@ public class I18nMessageController extends BasicController{
 		 }))
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public Response add(@RequestBody Map<String, Object> message) {
-		if(validate4Table(util.i18nMessageTableName(), message) == DataValidationResult.SUCCESS) {
+//		if(validate4Table(util.i18nMessageTableName(), message) == DataValidationResult.SUCCESS) {
 			messageUpdateService.insert(message);
-		}
+//		}
 		return ResponseContext.getFinalResponse();
 	}
 	
@@ -79,9 +78,9 @@ public class I18nMessageController extends BasicController{
 		 }))
 	@RequestMapping(value="/batchAdd", method=RequestMethod.POST)
 	public Response batchAdd(@RequestBody List<Map<String, Object>> messages) {
-		if(validate4Table(util.i18nMessageTableName(), messages) == DataValidationResult.SUCCESS) {
+//		if(validate4Table(util.i18nMessageTableName(), messages) == DataValidationResult.SUCCESS) {
 			messageUpdateService.insert(messages);
-		}
+//		}
 		return ResponseContext.getFinalResponse(true);
 	}
 	
@@ -99,9 +98,9 @@ public class I18nMessageController extends BasicController{
 		 }))
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public Response update(@RequestBody Map<String, Object> message) {
-		if(validate4Table(util.i18nMessageTableName(), message) == DataValidationResult.SUCCESS) {
+//		if(validate4Table(util.i18nMessageTableName(), message) == DataValidationResult.SUCCESS) {
 			messageUpdateService.update(message);
-		}
+//		}
 		return ResponseContext.getFinalResponse();
 	}
 	
@@ -112,9 +111,9 @@ public class I18nMessageController extends BasicController{
 	 */
 	@RequestMapping(value="/batchUpdate", method=RequestMethod.POST)
 	public Response batchUpdate(@RequestBody List<Map<String, Object>> messages) {
-		if(validate4Table(util.i18nMessageTableName(), messages) == DataValidationResult.SUCCESS) {
+//		if(validate4Table(util.i18nMessageTableName(), messages) == DataValidationResult.SUCCESS) {
 			messageUpdateService.update(messages);
-		}
+//		}
 		return ResponseContext.getFinalResponse(true);
 	}
 
